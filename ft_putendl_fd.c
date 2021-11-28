@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:40:51 by jinoh             #+#    #+#             */
-/*   Updated: 2021/11/27 16:40:52 by jinoh            ###   ########.fr       */
+/*   Updated: 2021/11/28 18:31:21 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	if (fd == -1)
+	if (!s || fd < 0)
 		return ;
 	ft_putstr_fd(s, fd);
 	write(fd, "\n", 1);

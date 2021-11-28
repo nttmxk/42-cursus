@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:43:03 by jinoh             #+#    #+#             */
-/*   Updated: 2021/11/27 16:49:32 by jinoh            ###   ########.fr       */
+/*   Updated: 2021/11/28 18:27:52 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	size_t	len;
 	size_t	i;
 
-	len = ft_strlen(s);
 	if (!s)
-		return (NULL); // is this a 'guard'?
+		return (NULL);
+	len = ft_strlen(s);
 	ret = malloc((len + 1) * sizeof(char));
 	if (!ret)
 		return (NULL);

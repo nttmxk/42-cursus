@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:44:43 by jinoh             #+#    #+#             */
-/*   Updated: 2021/11/27 16:44:44 by jinoh            ###   ########.fr       */
+/*   Updated: 2021/11/28 18:29:48 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	a;
 	char	*ret;
 
+	if (!s1)
+		return (NULL);
 	i = 0;
 	while (s1[i] && ft_strchr(set, s1[i]))
 		++i;

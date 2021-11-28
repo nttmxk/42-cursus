@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:42:05 by jinoh             #+#    #+#             */
-/*   Updated: 2021/11/27 16:48:41 by jinoh            ###   ########.fr       */
+/*   Updated: 2021/11/28 18:28:30 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	size_t	i;
 	char	*ret;
 
+	if (!s1 || !s2)
+		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	ret = malloc(len * sizeof(char));
 	if (!ret)

@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:44:55 by jinoh             #+#    #+#             */
-/*   Updated: 2021/11/27 16:52:50 by jinoh            ###   ########.fr       */
+/*   Updated: 2021/11/28 18:49:26 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char			*ret;
 	unsigned int	i;
 
+	if (!s)
+		return (NULL);
 	if (start > ft_strlen(s) || len == 0)
 	{
 		ret = malloc(sizeof(char));
 		if (!ret)
 			return (NULL);
 		else
-		{
 			ret[0] = 0;
-			return (ret);
-		}
+		return (ret);
 	}
 	if (ft_strlen(s) - start < len)
 		len = ft_strlen(s) - start;

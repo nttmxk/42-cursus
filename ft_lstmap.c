@@ -6,17 +6,19 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:44:43 by jinoh             #+#    #+#             */
-/*   Updated: 2021/11/27 16:44:44 by jinoh            ###   ########.fr       */
+/*   Updated: 2021/11/28 20:24:14 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list *ret;
-	t_list *temp;
+	t_list	*ret;
+	t_list	*temp;
 
+	if (!lst)
+		return (NULL);
 	ret = ft_lstnew(f(lst->content));
 	if (!ret)
 		return (NULL);

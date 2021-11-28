@@ -6,15 +6,15 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:44:43 by jinoh             #+#    #+#             */
-/*   Updated: 2021/11/27 16:44:44 by jinoh            ###   ########.fr       */
+/*   Updated: 2021/11/28 20:24:08 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_lstsize(t_list *lst)
+int	ft_lstsize(t_list *lst)
 {
-	int size;
+	int	size;
 
 	size = 0;
 	while (lst)
