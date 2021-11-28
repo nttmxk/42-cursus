@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:44:10 by jinoh             #+#    #+#             */
-/*   Updated: 2021/11/27 16:52:26 by jinoh            ###   ########.fr       */
+/*   Updated: 2021/11/28 22:09:56 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	len_l;
 	size_t	len_b;
 
-	if (!little || !*little)
-		return ((char *)big);
 	i = 0;
 	len_b = ft_strlen(big);
 	len_l = ft_strlen(little);

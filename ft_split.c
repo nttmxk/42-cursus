@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 16:44:43 by jinoh             #+#    #+#             */
-/*   Updated: 2021/11/28 20:24:37 by jinoh            ###   ########.fr       */
+/*   Updated: 2021/11/28 21:53:23 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,16 @@
 static int		ft_find(const char *str, char c);
 static int		ft_count(const char *str, char c);
 static char		**ft_free(char **str, int size);
+static char		**ft_split2(char const *s, char c);
 
 char	**ft_split(char const *s, char c)
+{
+	if (!s)
+		return (NULL);
+	return (ft_split2(s, c));
+}
+
+static char	**ft_split2(char const *s, char c)
 {
 	char	**ret;
 	int		i;
@@ -39,9 +47,9 @@ char	**ft_split(char const *s, char c)
 		ret[++i] = ft_substr(s, prev, next);
 		if (!ret[i])
 			return (ft_free(ret, i));
-		prev += next + 1;
+		prev += next;
 	}
-	ret[++i] = 0;
+	ret[++i] = NULL;
 	return (ret);
 }
 
@@ -79,10 +87,10 @@ static int	ft_find(const char *str, char c)
 
 static char	**ft_free(char **str, int size)
 {
-	while (size >= 0 && str[size])
+	while (--size >= 0)
 	{
 		free(str[size]);
-		str[size--] = NULL;
+		str[size] = NULL;
 	}
 	free(str);
 	str = NULL;
