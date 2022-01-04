@@ -1,87 +1,59 @@
 #include "get_next_line.h"
 
-char *get_next_line(int fd)
+char	*gnl_exception(char *data, int r_size);
+char	*gnl_with_data(char **data, int fd);
+
+char	*get_next_line(int fd)
 {
-	char buf[BUFFER_SIZE + 1];
-	static char *data;
-	char *ret;
-	int size;
-	int pos;
+	char		buf[BUFFER_SIZE + 1];
+	static char	*data;
+	int			r_size;
 
 	if (fd < 0)
 		return (NULL);
 	if (data != 0 && *data != 0)
+		return (gnl_with_data(&data, fd));
+	r_size = read(fd, buf, BUFFER_SIZE);
+	if (r_size > 0)
 	{
-		pos = ft_strchr(data, '\n');
-		if (pos == -1)
-		{
-			size = read(fd, buf, BUFFER_SIZE);
-			if (size > 0)
-			{
-				buf[size] = '\0';
-				data = ft_strjoin(data, buf);
-				return (get_next_line(fd));
-			}
-			else if (size == 0)
-			{
-				ret = ft_substr(data, 0, ft_strlen(data));
-				return (ret);
-			}
-			else
-				return (NULL);
-		}
-		else
-		{ // we found LF
-			ret = ft_substr(data, 0, pos + 1);
-			ft_memmove(data, data + pos + 1, ft_strlen(data) - pos);
-			return (ret);
-		}
+		buf[r_size] = '\0';
+		data = ft_strjoin(data, buf);
+		return (get_next_line(fd));
 	}
-	else
-	{ // we have no data from ex
-		size = read(fd, buf, BUFFER_SIZE);
-		if (size > 0)
-		{
-			buf[size] = '\0';
-			data = ft_strjoin(data, buf);
-			return (get_next_line(fd));
-		}
-		else if (size == 0)
-		{
-			if (*data == 0)
-				return (NULL);
-			ret = ft_substr(data, 0, ft_strlen(data));
-			return (ret);
-		}
-		else
-			return (NULL);
-	}
+	return (gnl_exception(data, r_size));
 }
 
-int main() {
-	int fd;
-	int i;
-	int j;
-	char *line;
+char	*gnl_exception(char *data, int r_size)
+{
+	if (r_size == 0)
+		return (ft_substr(data, ft_strlen(data)));
+	else
+		return (NULL);
+}
 
-	j = 1;
-	printf("\n==========================================\n");
-	printf("========= TEST 2 : Empty Lines ===========\n");
-	printf("==========================================\n\n");
+char	*gnl_with_data(char **data, int fd)
+{
+	char	buf[BUFFER_SIZE + 1];
+	char	*ret;
+	int		pos;
+	int		r_size;
 
-	if (!(fd = open("../test.txt", O_RDONLY)))
+	pos = ft_strchr(*data);
+	if (pos == -1)
 	{
-		printf("\nError in open\n");
-		return (0);
+		r_size = read(fd, buf, BUFFER_SIZE);
+		if (r_size > 0)
+		{
+			buf[r_size] = '\0';
+			*data = ft_strjoin(*data, buf);
+			return (get_next_line(fd));
+		}
+		return (gnl_exception(*data, r_size));
 	}
-	while ((line = get_next_line(fd)) > 0)
+	else
 	{
-		printf("|%s\n", line);
-		free(line);
-		j++;
+		ret = ft_substr(*data, pos + 1);
+		*data = ft_memmove(*data, *data + pos + 1, ft_strlen(*data) - pos);
+		return (ret);
 	}
-	printf("|%s\n", line);
-	free(line);
-	close(fd);
-
 }
