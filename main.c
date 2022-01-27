@@ -19,7 +19,7 @@ int	main(int argc, char *argv[])
 	return (0);
 }
 
-void printst(t_stack *st) // for checking
+void	printst(t_stack *st) // for checking
 {
 	int i = -1;
 	printf("bottom { ");

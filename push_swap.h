@@ -1,14 +1,14 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
-//# include <unistd.h> // write read
+# include <unistd.h> // write read
 # include <stdlib.h> // malloc free exit
 # include <limits.h> // INT_MAX
 # define ST_SIZE 1000
 
 typedef struct s_stack
 {
-	int top;
-	int st[ST_SIZE];
+	int	top;
+	int	st[ST_SIZE];
 }	t_stack;
 void printst(t_stack *st); ////////// testing
 /*

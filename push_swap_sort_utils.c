@@ -25,6 +25,7 @@ int	ft_get_min_move(int a, int b)
 	}
 	return (a + b);
 }
+
 int	ft_get_move(t_stack *a, int b)
 {
 	int	i;
@@ -50,6 +51,7 @@ int	ft_get_move(t_stack *a, int b)
 	write(2, "Error2\n", 7);
 	return (5000);
 }
+
 int	ft_min(int a, int b)
 {
 	if (a < b)

@@ -20,7 +20,7 @@ void	sorting(t_stack *a, t_stack *b)
 			_sorting(a, b);
 	}
 	get_mintop(a);
-	printst(a);
+//	printst(a);
 }
 
 static void	_sorting(t_stack *a, t_stack *b)
@@ -35,7 +35,7 @@ static void	_sorting(t_stack *a, t_stack *b)
 	{
 		moves[i][0] = ft_min(b->top - i, i + 1);
 		moves[i][1] = ft_get_move(a, b->st[i]);
-		moves[i][2] = ft_get_min_move(moves[i][0] , moves[i][1]);
+		moves[i][2] = ft_get_min_move(moves[i][0], moves[i][1]);
 		if (moves[i][2] < moves[min_moves][2])
 			min_moves = i;
 	}

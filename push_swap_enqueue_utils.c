@@ -33,4 +33,3 @@ int	ft_atol(const char *s)
 	}
 	return ((int)ret);
 }
-
