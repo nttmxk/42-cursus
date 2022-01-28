@@ -2,6 +2,7 @@
 
 static void	_sorting(t_stack *a, t_stack *b);
 static void	_sort_3(t_stack *a);
+static void	_sort_5(t_stack *a, t_stack *b);
 
 void	sorting(t_stack *a, t_stack *b)
 {
@@ -10,6 +11,8 @@ void	sorting(t_stack *a, t_stack *b)
 
 	if (a->top == 2)
 		_sort_3(a);
+	else if (a->top == 4)
+		_sort_5(a, b);
 	else
 	{
 		get_mintop(a);
@@ -20,7 +23,7 @@ void	sorting(t_stack *a, t_stack *b)
 			_sorting(a, b);
 	}
 	get_mintop(a);
-//	printst(a);
+	//	printst(a);
 }
 
 static void	_sorting(t_stack *a, t_stack *b)
@@ -64,7 +67,7 @@ void	get_mintop(t_stack *a)
 			minx = i;
 		}
 	}
-	if (minx > a->top / 2)
+	if (minx >= a->top / 2)
 	{
 		while (++minx <= a->top)
 			ra(a);
@@ -104,9 +107,9 @@ static void	_sort_3(t_stack *a)
 	int	j;
 	int	k;
 
-	i = a->st[0];
+	i = a->st[2];
 	j = a->st[1];
-	k = a->st[2];
+	k = a->st[0];
 	if ((i > j && i > k && j < k)
 		|| (i < j && j > k && i > k)
 		|| (i < j && i < k && j < k))
@@ -125,4 +128,13 @@ static void	_sort_3(t_stack *a)
 		rra(a);
 		sa(a);
 	}
+}
+
+static void	_sort_5(t_stack *a, t_stack *b)
+{
+	pb(a, b);
+	pb(a, b);
+	_sort_3(a);
+	while (b->top != -1)
+		_sorting(a, b);
 }
