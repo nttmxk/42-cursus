@@ -36,7 +36,7 @@ void	ft_both_rr(t_stack *a, t_stack *b, int i, int j)
 	else
 	{
 		while (i++ < j)
-			rra(b);
+			rra(a);
 		while (j++ < 0)
 			rrr(a, b);
 	}
@@ -55,7 +55,7 @@ void	ft_both_r(t_stack *a, t_stack *b, int i, int j)
 	{
 		while (i < j--)
 			rb(b);
-		while (i-- < 0)
+		while (i-- > 0)
 			rr(a, b);
 	}
 }
