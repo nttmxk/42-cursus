@@ -58,12 +58,4 @@ void	ss(t_stack *a, t_stack *b);
 void	rr(t_stack *a, t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
 
-////////////		libft
-int		ft_isdigit(int c);
-char	*ft_strchr(const char *s, int c);
-char	**ft_split(char const *s, char c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-size_t	ft_strlen(const char *s);
-////////////
-
 #endif
