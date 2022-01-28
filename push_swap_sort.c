@@ -52,31 +52,6 @@ static void	_sorting(t_stack *a, t_stack *b)
 	pa(a, b);
 }
 
-static void	ft_get_optimal(int *i, int *j, int a, int b)
-{
-	if ((*i) < 0)
-	{
-		if (ft_get_min_move((*j), b + (*i) + 1)
-			< ft_get_min_move((*i), - (a - (*j) + 1)))
-		{
-			if ((*j) - (*i) > ft_get_min_move((*j), b + (*i) + 1))
-				(*i) = b + (*i) + 1;
-		}
-		else if ((*j) - (*i) > ft_get_min_move((*i), -(a - (*j) + 1)))
-			(*j) = -(a - (*j) + 1);
-	}
-	else
-	{
-		if (ft_get_min_move((*j), -(b - (*i) + 1))
-			< ft_get_min_move((*i), a + (*j) + 1))
-		{
-			if ((*i) - (*j) > ft_get_min_move((*j), -(b - (*i) + 1)))
-				(*i) = -(b - (*i) + 1);
-		}
-		else if ((*i) - (*j) > ft_get_min_move((*i), a + (*j) + 1))
-			(*j) = a + (*j) + 1;
-	}
-}
 
 static void	_sort_3(t_stack *a)
 {
@@ -114,4 +89,30 @@ static void	_sort_5(t_stack *a, t_stack *b)
 	_sort_3(a);
 	while (b->top != -1)
 		_sorting(a, b);
+}
+
+static void	ft_get_optimal(int *i, int *j, int a, int b)
+{
+	if ((*i) < 0)
+	{
+		if (ft_get_min_move((*j), b + (*i) + 1)
+			< ft_get_min_move((*i), - (a - (*j) + 1)))
+		{
+			if ((*j) - (*i) > ft_get_min_move((*j), b + (*i) + 1))
+				(*i) = b + (*i) + 1;
+		}
+		else if ((*j) - (*i) > ft_get_min_move((*i), -(a - (*j) + 1)))
+			(*j) = -(a - (*j) + 1);
+	}
+	else
+	{
+		if (ft_get_min_move((*j), -(b - (*i) + 1))
+			< ft_get_min_move((*i), a + (*j) + 1))
+		{
+			if ((*i) - (*j) > ft_get_min_move((*j), -(b - (*i) + 1)))
+				(*i) = -(b - (*i) + 1);
+		}
+		else if ((*i) - (*j) > ft_get_min_move((*i), a + (*j) + 1))
+			(*j) = a + (*j) + 1;
+	}
 }
