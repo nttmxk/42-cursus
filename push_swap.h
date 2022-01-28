@@ -4,6 +4,7 @@
 # include <stdlib.h> // malloc free exit
 # include <limits.h> // INT_MAX
 # define ST_SIZE 1000
+# include "./libft/libft.h"
 
 typedef struct s_stack
 {

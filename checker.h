@@ -1,8 +1,9 @@
 #ifndef CHECKER_H
 # define CHECKER_H
-//# include <unistd.h> // write read
+# include <unistd.h> // write read
 # include <stdlib.h> // malloc free exit
 # include <limits.h> // INT_MAX
+# include "./get_next_line.h"
 # define ST_SIZE 1000
 
 typedef struct s_stack

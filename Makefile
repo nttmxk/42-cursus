@@ -6,7 +6,7 @@
 #    By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/06 17:32:03 by jinoh             #+#    #+#              #
-#    Updated: 2022/01/28 21:35:11 by jinoh            ###   ########.fr        #
+#    Updated: 2022/01/29 00:35:55 by jinoh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,17 @@ SRCS					= push_swap.c \
 						  push_swap_utils.c \
 
 BNS_SRCS				= checker.c \
+						  checker_check_input.c \
+						  checker_enqueue.c \
+						  checker_enqueue_utils.c \
+						  checker_lis.c \
+						  checker_op_basic.c \
+						  checker_operations_1.c \
+						  checker_operations_2.c \
+						  checker_operations_3.c \
+						  checker_parse.c \
+						  get_next_line.c \
+						  get_next_line_utils.c \
 
 OBJS					= $(SRCS:.c=.o)
 BNS_OBJS				= $(BNS_SRCS:.c=.o)
@@ -47,10 +58,10 @@ else
 	NAME = $(MAN_NAME)
 endif
 
-$(NAME)		:	$(OBJ_FILES)
+$(NAME)	:	$(OBJ_FILES)
 	gcc $(FLAGS) -o $@ $^ -L $(LIBFT) -lft
 
-all	:	$(NAME) $(LIBFT_LIB)
+all		:	$(LIBFT_LIB) $(NAME)
 
 $(LIBFT_LIB) :
 	@make -C $(LIBFT)
