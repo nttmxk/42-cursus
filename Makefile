@@ -32,7 +32,7 @@ SRCS					= push_swap.c \
 						  push_swap_sort_utils.c \
 						  push_swap_utils.c \
 
-BNS_SRCS				= 
+BNS_SRCS				= checker.c \
 
 OBJS					= $(SRCS:.c=.o)
 BNS_OBJS				= $(BNS_SRCS:.c=.o)
