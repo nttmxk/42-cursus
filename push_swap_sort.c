@@ -52,7 +52,6 @@ static void	_sorting(t_stack *a, t_stack *b)
 	pa(a, b);
 }
 
-
 static void	_sort_3(t_stack *a)
 {
 	int	i;
