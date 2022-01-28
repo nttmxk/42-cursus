@@ -3,7 +3,8 @@
 # include <unistd.h> // write read
 # include <stdlib.h> // malloc free exit
 # include <limits.h> // INT_MAX
-# include "./get_next_line.h"
+# include "./libft/libft.h"
+//# include "./get_next_line.h"
 # define ST_SIZE 1000
 
 typedef struct s_stack
@@ -29,6 +30,7 @@ int		b_search(int *dp, int a, int s, int e);
 /*
  * parsing
  */
+char	*get_next_line(int fd);
 void	getinput(t_stack *a, t_stack *b);
 void	ft_parse(char *s, t_stack *a, t_stack *b);
 void	ft_parse_s(char *s, t_stack *a, t_stack *b);

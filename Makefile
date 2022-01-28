@@ -6,7 +6,7 @@
 #    By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/06 17:32:03 by jinoh             #+#    #+#              #
-#    Updated: 2022/01/29 00:35:55 by jinoh            ###   ########.fr        #
+#    Updated: 2022/01/29 00:51:59 by jinoh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS					= push_swap.c \
 						  push_swap_utils.c \
 
 BNS_SRCS				= checker.c \
+						  checker_utils.c \
 						  checker_check_input.c \
 						  checker_enqueue.c \
 						  checker_enqueue_utils.c \
@@ -67,7 +68,7 @@ $(LIBFT_LIB) :
 	@make -C $(LIBFT)
 
 bonus	:
-	@make WITH_BNS=1 $(NAME)
+	make WITH_BNS=1 $(NAME)
 
 *.o	: *.c
 	gcc $(FLAGS) -c $< -o $@ -I./

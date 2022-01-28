@@ -1,6 +1,6 @@
 #include "checker.h"
 
-void ft_parse(char *s, t_stack *a, t_stack *b)
+void	ft_parse(char *s, t_stack *a, t_stack *b)
 {
 	if (s[0] == 's')
 		ft_parse_s(s, a, b);
@@ -12,7 +12,7 @@ void ft_parse(char *s, t_stack *a, t_stack *b)
 		ft_error();
 }
 
-void ft_parse_s(char *s, t_stack *a, t_stack *b)
+void	ft_parse_s(char *s, t_stack *a, t_stack *b)
 {
 	if (s[1] == 'a' && s[2] == '\0')
 		sa(a);
@@ -24,7 +24,7 @@ void ft_parse_s(char *s, t_stack *a, t_stack *b)
 		ft_error();
 }
 
-void ft_parse_p(char *s, t_stack *a, t_stack *b)
+void	ft_parse_p(char *s, t_stack *a, t_stack *b)
 {
 	if (s[1] == 'a' && s[2] == '\0')
 		pa(a, b);
@@ -34,7 +34,7 @@ void ft_parse_p(char *s, t_stack *a, t_stack *b)
 		ft_error();
 }
 
-void ft_parse_r(char *s, t_stack *a, t_stack *b)
+void	ft_parse_r(char *s, t_stack *a, t_stack *b)
 {
 	if (s[1] == 'a' && s[2] == '\0')
 		ra(a);
