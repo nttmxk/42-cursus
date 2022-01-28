@@ -3,6 +3,7 @@
 static void	_sorting(t_stack *a, t_stack *b);
 static void	_sort_3(t_stack *a);
 static void	_sort_5(t_stack *a, t_stack *b);
+static void	ft_get_optimal(int *i, int *j, int a, int b);
 
 void	sorting(t_stack *a, t_stack *b)
 {
@@ -15,7 +16,6 @@ void	sorting(t_stack *a, t_stack *b)
 		_sort_5(a, b);
 	else
 	{
-		get_mintop(a);
 		get_lis(a, lis, 0);
 		size = a->top;
 		separate_stack(a, b, lis);
@@ -23,7 +23,6 @@ void	sorting(t_stack *a, t_stack *b)
 			_sorting(a, b);
 	}
 	get_mintop(a);
-	//	printst(a);
 }
 
 static void	_sorting(t_stack *a, t_stack *b)
@@ -38,6 +37,8 @@ static void	_sorting(t_stack *a, t_stack *b)
 	{
 		moves[i][0] = ft_min(b->top - i, i + 1);
 		moves[i][1] = ft_get_move(a, b->st[i]);
+		if (moves[i][0] * moves[i][1] < 0)
+			ft_get_optimal(&moves[i][0], &moves[i][1], a->top, b->top);
 		moves[i][2] = ft_get_min_move(moves[i][0], moves[i][1]);
 		if (moves[i][2] < moves[min_moves][2])
 			min_moves = i;
@@ -51,53 +52,29 @@ static void	_sorting(t_stack *a, t_stack *b)
 	pa(a, b);
 }
 
-void	get_mintop(t_stack *a)
+static void	ft_get_optimal(int *i, int *j, int a, int b)
 {
-	int	i;
-	int	min;
-	int	minx;
-
-	i = -1;
-	min = 2147483647;
-	while (++i <= a->top)
+	if ((*i) < 0)
 	{
-		if (a->st[i] < min)
+		if (ft_get_min_move((*j), b + (*i) + 1)
+			< ft_get_min_move((*i), - (a - (*j) + 1)))
 		{
-			min = a->st[i];
-			minx = i;
+			if ((*j) - (*i) > ft_get_min_move((*j), b + (*i) + 1))
+				(*i) = b + (*i) + 1;
 		}
-	}
-	if (minx >= a->top / 2)
-	{
-		while (++minx <= a->top)
-			ra(a);
+		else if ((*j) - (*i) > ft_get_min_move((*i), -(a - (*j) + 1)))
+			(*j) = -(a - (*j) + 1);
 	}
 	else
-		while (--minx >= -1)
-			rra(a);
-}
-
-void	separate_stack(t_stack *a, t_stack *b, int *lis)
-{
-	int	size;
-	int	total;
-	int	push;
-
-	size = lis[0];
-	push = 0;
-	total = a->top + 1 - size;
-	while (push != total)
 	{
-		if (size > 0 && a->st[a->top] == lis[size])
+		if (ft_get_min_move((*j), -(b - (*i) + 1))
+			< ft_get_min_move((*i), a + (*j) + 1))
 		{
-			ra(a);
-			--size;
+			if ((*i) - (*j) > ft_get_min_move((*j), -(b - (*i) + 1)))
+				(*i) = -(b - (*i) + 1);
 		}
-		else
-		{
-			pb(a, b);
-			++push;
-		}
+		else if ((*i) - (*j) > ft_get_min_move((*i), a + (*j) + 1))
+			(*j) = a + (*j) + 1;
 	}
 }
 

@@ -18,12 +18,3 @@ int	main(int argc, char *argv[])
 	sorting(&a, &b);
 	return (0);
 }
-
-void	printst(t_stack *st) // for checking
-{
-	int i = -1;
-	printf("bottom { ");
-	while (++i <= st->top)
-		printf("%d ", st->st[i]);
-	printf("}\n");
-}
