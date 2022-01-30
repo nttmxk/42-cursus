@@ -6,11 +6,11 @@
 #    By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/06 17:32:03 by jinoh             #+#    #+#              #
-#    Updated: 2022/01/29 00:51:59 by jinoh            ###   ########.fr        #
+#    Updated: 2022/01/31 03:03:22 by jinoh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-MAN_NAME				= push_swap
+NAME					= push_swap
 
 BNS_NAME				= checker
 
@@ -56,19 +56,16 @@ ifdef WITH_BNS
 	NAME = $(BNS_NAME)
 else
 	OBJ_FILES = $(OBJS)
-	NAME = $(MAN_NAME)
 endif
 
 $(NAME)	:	$(OBJ_FILES)
+	@make -C $(LIBFT)
 	gcc $(FLAGS) -o $@ $^ -L $(LIBFT) -lft
 
-all		:	$(LIBFT_LIB) $(NAME)
-
-$(LIBFT_LIB) :
-	@make -C $(LIBFT)
+all		:	$(NAME)
 
 bonus	:
-	make WITH_BNS=1 $(NAME)
+	make WITH_BNS=1 $(BNS_NAME)
 
 *.o	: *.c
 	gcc $(FLAGS) -c $< -o $@ -I./
@@ -78,7 +75,8 @@ clean	:
 	@make clean -C $(LIBFT)
 
 fclean	:	clean
-	rm -f $(MAN_NAME) $(BNS_NAME)
+	rm -f $(NAME) $(BNS_NAME)
+	@make fclean -C $(LIBFT)
 
 re	:	fclean all
 

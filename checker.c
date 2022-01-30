@@ -26,17 +26,16 @@ void	getinput(t_stack *a, t_stack *b)
 	while (1)
 	{
 		line = NULL;
-		write(1, "Enter\n", 6);
 		while (!line)
 			line = get_next_line(0);
 		if (line && line[0] == -1)
-			break;
+			break ;
 		ft_parse(line, a, b);
 		free(line);
 	}
 	free(line);
 	get_lis(a, lis, 0);
-	if (lis[0] != a->top)
+	if (lis[0] != a->top + 1)
 		write(1, "KO\n", 3);
 	else
 		write(1, "OK\n", 3);
