@@ -15,6 +15,8 @@ static void	check_digit_s(char *s)
 	int	i;
 
 	i = -1;
+	if (!s[0])
+		ft_error();
 	if (s[0] == '+' || s[0] == '-')
 		++i;
 	while (s[++i])
