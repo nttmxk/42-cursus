@@ -6,7 +6,7 @@
 #    By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/06 17:32:03 by jinoh             #+#    #+#              #
-#    Updated: 2022/01/31 03:03:22 by jinoh            ###   ########.fr        #
+#    Updated: 2022/02/01 01:54:16 by jinoh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRCS					= push_swap.c \
 						  push_swap_sort.c \
 						  push_swap_sort_2.c \
 						  push_swap_sort_utils.c \
-						  push_swap_utils.c \
+						  push_swap_utils.c
 
 BNS_SRCS				= checker.c \
 						  checker_utils.c \
@@ -44,7 +44,7 @@ BNS_SRCS				= checker.c \
 						  checker_operations_3.c \
 						  checker_parse.c \
 						  get_next_line.c \
-						  get_next_line_utils.c \
+						  get_next_line_utils.c
 
 OBJS					= $(SRCS:.c=.o)
 BNS_OBJS				= $(BNS_SRCS:.c=.o)
@@ -67,7 +67,7 @@ all		:	$(NAME)
 bonus	:
 	make WITH_BNS=1 $(BNS_NAME)
 
-*.o	: *.c
+%.o	: %.c
 	gcc $(FLAGS) -c $< -o $@ -I./
 
 clean	:
