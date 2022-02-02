@@ -56,9 +56,6 @@ void ft_check_input(char *s)
 
 void dispatch(int pid, int i)
 {
-	char c = i + '0';
-
-	write(1, &c, 1);
 	if (i == 0)
 		kill(pid, SIGUSR1);
 	else
@@ -85,15 +82,10 @@ void ft_send(int pid, char *s)
 
 	if (pid > PID_MAX) // chk
 		ft_error();
-//	kill(pid, SIGUSR1);
-//	pause();
 	size = ft_strlen(s);
 	i = -1;
 	while (++i < size)
-	{
 		_send(pid, s[i], 0);
-		write(1, "\n", 1);
-	}
 //	_send(pid, pid, 0);  // for bonus
 	_send(pid, 0, 0); // '\0'
 }
