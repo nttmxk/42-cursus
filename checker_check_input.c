@@ -15,10 +15,10 @@ static void	check_digit_s(char *s)
 	int	i;
 
 	i = -1;
-	if (!s[0])
-		ft_error();
 	if (s[0] == '+' || s[0] == '-')
 		++i;
+	if (!s[i + 1])
+		ft_error();
 	while (s[++i])
 	{
 		if (!ft_isdigit(s[i]))
@@ -35,6 +35,8 @@ static void	check_digit_str(char *s)
 	if (!str)
 		ft_error();
 	i = -1;
+	if (!str[0])
+		ft_error();
 	while (str[++i])
 		check_digit_s(str[i]);
 	free_str(str);
