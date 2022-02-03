@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 13:22:28 by jinoh             #+#    #+#             */
-/*   Updated: 2022/02/03 16:09:38 by jinoh            ###   ########.fr       */
+/*   Updated: 2022/02/03 16:30:38 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	sig_handler(int signo, siginfo_t *info, void *context)
 	static int				bit;
 	static int				pid;
 
+	(void)context;
 	if (bit == 8)
 	{
 		bit = 0;
