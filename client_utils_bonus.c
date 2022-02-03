@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 15:59:15 by jinoh             #+#    #+#             */
-/*   Updated: 2022/02/03 15:59:17 by jinoh            ###   ########.fr       */
+/*   Updated: 2022/02/03 17:50:40 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ void	ft_check_input(char *s)
 	i = -1;
 	if (!s[0])
 		ft_error();
-	if (s[++i])
+	while (s[++i])
 	{
 		if (!ft_isdigit(s[i]))
 			ft_error();
 	}
-	if (i > 4)
+	if (i > 5)
 		ft_error();
 }
