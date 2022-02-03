@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 13:22:28 by jinoh             #+#    #+#             */
-/*   Updated: 2022/02/03 16:30:38 by jinoh            ###   ########.fr       */
+/*   Updated: 2022/02/03 16:50:26 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	sig_handler(int signo, siginfo_t *info, void *context)
 		buf[i] += 1 << (8 - ++bit);
 	if (check_pid(info, &pid))
 		ft_error();
-	if (bit == 8 && (i > 495 || buf[i] == '\0'))
+	if (bit == 8 && (i > 494 || buf[i] == '\0'))
 	{
-		write(1, buf, i);
+		write(1, buf, i + 1);
 		write(1, "\n", 1);
 		i = -1;
 		pid = 0;
