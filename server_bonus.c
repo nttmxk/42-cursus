@@ -27,6 +27,7 @@ int	main(void)
 
 int	check_pid(siginfo_t *info, int *pid)
 {
+	usleep(50);
 	if (*pid == 0)
 		*pid = info->si_pid;
 	else if (*pid != info->si_pid)
