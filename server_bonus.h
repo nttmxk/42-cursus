@@ -18,10 +18,11 @@
 # include <signal.h>
 
 int		check_pid(siginfo_t *info, int *pid);
-void	ft_error(void);
+int		check_uni(unsigned char buf[], int i);
 void	sig_handler(int signo, siginfo_t *info, void *context);
 void	set_sig(struct sigaction *act);
 
+void	ft_error(void);
 void	ft_error(void);
 void	print_pid(void);
 char	*ft_itoa(int n);

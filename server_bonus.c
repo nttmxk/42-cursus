@@ -57,7 +57,7 @@ void	sig_handler(int signo, siginfo_t *info, void *context)
 		buf[i] += 1 << (8 - ++bit);
 	if (check_pid(info, &pid))
 		ft_error();
-	if (bit == 8 && (i > 494 || buf[i] == '\0'))
+	if (bit == 8 && ((i > 494 && check_uni(buf, i)) || buf[i] == '\0'))
 	{
 		write(1, buf, i + 1);
 		write(1, "\n", 1);
@@ -65,6 +65,22 @@ void	sig_handler(int signo, siginfo_t *info, void *context)
 		pid = 0;
 	}
 	kill(info->si_pid, SIGUSR1);
+}
+
+int	check_uni(unsigned char buf[], int i)
+{
+	if (buf[i] < 128)
+		return (1);
+	else if (buf[i] < 192)
+	{
+		if (buf[i - 3] >= 240)
+			return (1);
+		else if (buf[i - 2] < 240)
+			return (1);
+		else if (buf[i - 1] < 224)
+			return (1);
+	}
+	return (0);
 }
 
 void	set_sig(struct sigaction *act)
