@@ -15,11 +15,13 @@ NAME_2					= client
 
 SRCS_1					= server.c
 
-SRCS_2					= checker.c
+SRCS_2					= client.c \
+						client_utils.c
 
 BNS_OBJS_1				= server_bonus.c
 
-BNS_OBJS_2				= checker_bonus.c
+BNS_OBJS_2				= client_bonus.c \
+						client_utils_bonus.c
 
 OBJS_1					= $(SRCS_1:.c=.o)
 OBJS_2					= $(SRCS_2:.c=.o)

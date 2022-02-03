@@ -10,7 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "server.h"
+#include "server_bonus.h"
+
+int	main(void)
+{
+	struct sigaction	act1;
+
+	ft_printf("Server PID: %d\n", getpid());
+	set_sig(&act1);
+	sigaction(SIGUSR1, &act1, NULL);
+	sigaction(SIGUSR2, &act1, NULL);
+	while (1)
+		pause();
+	return (0);
+}
 
 void	ft_error(void)
 {
@@ -49,7 +62,7 @@ void	sig_handler(int signo, siginfo_t *info, void *context)
 		buf[i] += 1 << (8 - ++bit);
 	if (check_pid(info, &pid))
 		ft_error();
-	if (i > 499 || (bit == 8 && buf[i] == '\0'))
+	if (bit == 8 && (i > 495 || buf[i] == '\0'))
 	{
 		write(1, buf, i);
 		write(1, "\n", 1);
@@ -63,17 +76,4 @@ void	set_sig(struct sigaction *act)
 {
 	act->sa_sigaction = sig_handler;
 	act->sa_flags = SA_SIGINFO;
-}
-
-int	main(void)
-{
-	struct sigaction	act1;
-
-	printf("Server PID: %d\n", getpid());
-	set_sig(&act1);
-	sigaction(SIGUSR1, &act1, NULL);
-	sigaction(SIGUSR2, &act1, NULL);
-	while (1)
-		pause();
-	return (0);
 }

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#ifndef CLIENT_BONUS_H
+# define CLIENT_BONUS_H
 
 # include <stdio.h>
 # include <unistd.h>
@@ -25,6 +25,7 @@ size_t	ft_strlen(const char *s);
 void	ft_error(void);
 void	ft_check_input(char *s);
 
+void	sig_handler(int signo);
 void	ft_send(int pid, char *s);
 
 #endif

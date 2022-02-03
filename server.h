@@ -13,9 +13,11 @@
 #ifndef SERVER_H
 # define SERVER_H
 
-# include <stdio.h> // printf
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
+
+int	ft_printf(const char *fmt, ...);
+void	sig_handler(int signo);
 
 #endif
