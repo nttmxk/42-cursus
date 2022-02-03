@@ -51,10 +51,10 @@ int	check_pid(siginfo_t *info, int *pid)
 
 void	sig_handler(int signo, siginfo_t *info, void *context)
 {
-	static unsigned char	buf[500];
-	static int				i;
-	static int				bit;
-	static int				pid;
+	static char	buf[500];
+	static int	i;
+	static int	bit;
+	static int	pid;
 
 	(void)context;
 	if (bit == 8)
@@ -70,7 +70,8 @@ void	sig_handler(int signo, siginfo_t *info, void *context)
 		ft_error();
 	if (bit == 8 && ((i > 494) || buf[i] == '\0'))
 	{
-		print_buf(buf, i);
+		write(1, buf, i + 1);
+		write(1, "\n", 1);
 		i = -1;
 		pid = 0;
 	}

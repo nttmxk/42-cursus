@@ -24,9 +24,9 @@ int	main(void)
 
 void	sig_handler(int signo)
 {
-	static unsigned char	buf[500];
-	static int				i;
-	static int				bit;
+	static char	buf[500];
+	static int	i;
+	static int	bit;
 
 	if (bit == 8)
 	{
