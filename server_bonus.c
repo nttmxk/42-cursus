@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 13:22:28 by jinoh             #+#    #+#             */
-/*   Updated: 2022/02/03 13:22:36 by jinoh            ###   ########.fr       */
+/*   Updated: 2022/02/03 14:04:28 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int check_pid(siginfo_t *info, int *pid)
 	return (0);
 }
 
-void	sig_handler(int signo, siginfo_t *info)
+void	sig_handler(int signo, siginfo_t *info, void *context)
 {
 	static unsigned char	buf[500];
 	static int				i;
@@ -57,12 +57,13 @@ void	sig_handler(int signo, siginfo_t *info)
 		write(1, "\n", 1);
 		i = 0;
 		buf[0] = 0;
+		pid = 0;
 	}
 }
 
 void set_sig(struct sigaction *act)
 {
-	act->sa_handler = sig_handler;
+	act->sa_sigaction = sig_handler;
 	act->sa_flags = SA_SIGINFO;
 }
 
