@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 13:22:28 by jinoh             #+#    #+#             */
-/*   Updated: 2022/02/03 14:04:28 by jinoh            ###   ########.fr       */
+/*   Updated: 2022/02/03 15:04:56 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	sig_handler(int signo, siginfo_t *info, void *context)
 		++bit;
 	else if (signo == SIGUSR2)
 		buf[i] += 1 << (8 - ++bit);
+	if (check_pid(info, &pid))
+		ft_error();
 	if (i > 499 || (bit == 8 && buf[i] == '\0'))
 	{
 		write(1, buf, i);
@@ -54,10 +56,7 @@ void	sig_handler(int signo, siginfo_t *info, void *context)
 		i = -1;
 		pid = 0;
 	}
-	if (check_pid(info, &pid))
-		ft_error();
-	else
-		kill(pid, SIGUSR1);
+	kill(info->si_pid, SIGUSR1);
 }
 
 void set_sig(struct sigaction *act)
@@ -72,11 +71,9 @@ int	main(void)
 
 	printf("Server PID: %d\n", getpid());
 	set_sig(&act1);
+	sigaction(SIGUSR1, &act1, NULL);
+	sigaction(SIGUSR2, &act1, NULL);
 	while (1)
-	{
-		sigaction(SIGUSR1, &act1, NULL);
-		sigaction(SIGUSR2, &act1, NULL);
 		pause();
-	}
 	return (0);
 }

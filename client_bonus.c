@@ -55,10 +55,7 @@ void	ft_check_input(char *s)
 void	sig_handler(int signo)
 {
 	if (signo == SIGUSR1)
-	{
-		write(1, "0", 1);
 		return ;
-	}
 	else
 	{
 		write(2, "Crash!\n", 7);
