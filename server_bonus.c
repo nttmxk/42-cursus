@@ -12,6 +12,16 @@
 
 #include "server_bonus.h"
 
+void print_buf(unsigned char buf[], int size)
+{
+	int i;
+
+	i = -1;
+	while (++i <= size)
+		write(1, &buf[i], 1);
+	write(1, "\n", 1);
+}
+
 int	main(void)
 {
 	struct sigaction	act1;
@@ -58,10 +68,9 @@ void	sig_handler(int signo, siginfo_t *info, void *context)
 		buf[i] += 1 << (8 - ++bit);
 	if (check_pid(info, &pid))
 		ft_error();
-	if (bit == 8 && ((i > 494 && check_uni(buf, i)) || buf[i] == '\0'))
+	if (bit == 8 && ((i > 494) || buf[i] == '\0'))
 	{
-		write(1, buf, i + 1);
-		write(1, "\n", 1);
+		print_buf(buf, i);
 		i = -1;
 		pid = 0;
 	}
