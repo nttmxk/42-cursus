@@ -26,6 +26,7 @@ int	main(int argc, char *argv[])
 
 void	sig_handler(int signo)
 {
+	usleep(50);
 	if (signo == SIGUSR1)
 		return ;
 	else
