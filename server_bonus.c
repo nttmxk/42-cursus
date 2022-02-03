@@ -38,10 +38,6 @@ void	sig_handler(int signo, siginfo_t *info, void *context)
 	static int				bit;
 	static int 				pid;
 
-	if (check_pid(info, &pid))
-		ft_error();
-	else
-		kill(pid, SIGUSR1);
 	if (bit == 8)
 	{
 		bit = 0;
@@ -55,10 +51,13 @@ void	sig_handler(int signo, siginfo_t *info, void *context)
 	{
 		write(1, buf, i);
 		write(1, "\n", 1);
-		i = 0;
-		buf[0] = 0;
+		i = -1;
 		pid = 0;
 	}
+	if (check_pid(info, &pid))
+		ft_error();
+	else
+		kill(pid, SIGUSR1);
 }
 
 void set_sig(struct sigaction *act)
@@ -72,13 +71,11 @@ int	main(void)
 	struct sigaction act1;
 
 	printf("Server PID: %d\n", getpid());
+	set_sig(&act1);
 	while (1)
 	{
-		set_sig(&act1);
 		sigaction(SIGUSR1, &act1, NULL);
 		sigaction(SIGUSR2, &act1, NULL);
-//		signal(SIGUSR1, (void *)sig_handler);
-//		signal(SIGUSR2, (void *)sig_handler);
 		pause();
 	}
 	return (0);
