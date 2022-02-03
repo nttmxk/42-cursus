@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 13:22:28 by jinoh             #+#    #+#             */
-/*   Updated: 2022/02/03 15:04:56 by jinoh            ###   ########.fr       */
+/*   Updated: 2022/02/03 15:08:19 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	ft_error(void)
 	exit(1);
 }
 
-int check_pid(siginfo_t *info, int *pid)
+int	check_pid(siginfo_t *info, int *pid)
 {
 	if (*pid == 0)
 		*pid = info->si_pid;
 	else if (*pid != info->si_pid)
 	{
-		kill (*pid, SIGUSR2);
-		kill (info->si_pid, SIGUSR2);
+		kill(*pid, SIGUSR2);
+		kill(info->si_pid, SIGUSR2);
 		return (1);
 	}
 	return (0);
@@ -36,7 +36,7 @@ void	sig_handler(int signo, siginfo_t *info, void *context)
 	static unsigned char	buf[500];
 	static int				i;
 	static int				bit;
-	static int 				pid;
+	static int				pid;
 
 	if (bit == 8)
 	{
@@ -59,7 +59,7 @@ void	sig_handler(int signo, siginfo_t *info, void *context)
 	kill(info->si_pid, SIGUSR1);
 }
 
-void set_sig(struct sigaction *act)
+void	set_sig(struct sigaction *act)
 {
 	act->sa_sigaction = sig_handler;
 	act->sa_flags = SA_SIGINFO;
@@ -67,7 +67,7 @@ void set_sig(struct sigaction *act)
 
 int	main(void)
 {
-	struct sigaction act1;
+	struct sigaction	act1;
 
 	printf("Server PID: %d\n", getpid());
 	set_sig(&act1);
