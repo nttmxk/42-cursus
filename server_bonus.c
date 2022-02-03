@@ -74,11 +74,14 @@ int	check_uni(unsigned char buf[], int i)
 		return (1);
 	else if (buf[i] < 192)
 	{
-		if (buf[i - 3] >= 240)
+		else if ((buf[i - 3] >= 240 && buf[i - 3] < 248)
+				 || (buf[i - 2] >= 128 && buf[i - 2] < 192)
+				 || (buf[i - 1] >= 128 && buf[i - 1] < 192))
 			return (1);
-		else if (buf[i - 2] < 240)
+		else if ((buf[i - 2]  >= 224 && buf[i - 2] < 240)
+				 || (buf[i - 1] >= 128 && buf[i - 1] < 192))
 			return (1);
-		else if (buf[i - 1] < 224)
+		else if (buf[i - 1] >= 192 && buf[i - 1] < 224)
 			return (1);
 	}
 	return (0);
