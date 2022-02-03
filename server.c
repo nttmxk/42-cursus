@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 12:48:26 by jinoh             #+#    #+#             */
-/*   Updated: 2022/02/03 15:57:48 by jinoh            ###   ########.fr       */
+/*   Updated: 2022/02/03 16:14:35 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(void)
 {
-	ft_printf("Server PID: %d\n", getpid());
+	print_pid();
 	signal(SIGUSR1, (void *)sig_handler);
 	signal(SIGUSR2, (void *)sig_handler);
 	while (1)

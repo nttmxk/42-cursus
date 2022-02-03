@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 12:48:32 by jinoh             #+#    #+#             */
-/*   Updated: 2022/02/03 15:59:01 by jinoh            ###   ########.fr       */
+/*   Updated: 2022/02/03 16:14:05 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ void	sig_handler(int signo);
 void	ft_error(void);
 void	print_pid(void);
 char	*ft_itoa(int n);
+size_t	ft_strlen(const char *s);
 
 #endif

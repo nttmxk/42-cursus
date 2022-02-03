@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server_utils_bonus.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/03 16:10:52 by jinoh             #+#    #+#             */
+/*   Updated: 2022/02/03 16:13:21 by jinoh            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "server_bonus.h"
 
 void	ft_error(void)
@@ -35,7 +47,7 @@ char	*ft_itoa(int n)
 		temp[--i] = j + '0';
 		n /= 10;
 	}
-	ret = malloc(12 - i + 1, sizeof(char));
+	ret = malloc((12 - i + 1) * sizeof(char));
 	if (!ret)
 		return (NULL);
 	j = -1;
@@ -43,4 +55,14 @@ char	*ft_itoa(int n)
 		ret[++j] = temp[i++];
 	ret[++j] = '\0';
 	return (ret);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		++i;
+	return (i);
 }

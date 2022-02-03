@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 15:58:10 by jinoh             #+#    #+#             */
-/*   Updated: 2022/02/03 15:58:15 by jinoh            ###   ########.fr       */
+/*   Updated: 2022/02/03 16:15:48 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ void	set_sig(struct sigaction *act);
 void	ft_error(void);
 void	print_pid(void);
 char	*ft_itoa(int n);
+size_t	ft_strlen(const char *s);
 
 #endif
