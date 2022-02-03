@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 12:48:21 by jinoh             #+#    #+#             */
-/*   Updated: 2022/02/03 15:57:17 by jinoh            ###   ########.fr       */
+/*   Updated: 2022/02/03 20:00:58 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
-# define PID_MAX 132768
+# define PID_MAX 100000
 
 int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
