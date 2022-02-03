@@ -51,10 +51,10 @@ int	check_pid(siginfo_t *info, int *pid)
 
 void	sig_handler(int signo, siginfo_t *info, void *context)
 {
-	static char	buf[500];
-	static int	i;
-	static int	bit;
-	static int	pid;
+	static unsigned char	buf[500];
+	static int				i;
+	static int				bit;
+	static int				pid;
 
 	(void)context;
 	if (bit == 8)

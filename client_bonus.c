@@ -13,7 +13,7 @@
 #include "client_bonus.h"
 
 static void	_dispatch(int pid, int i);
-static void	_send(int pid, char c, int i);
+static void	_send(int pid, unsigned char c, int i);
 
 int	main(int argc, char *argv[])
 {
@@ -61,7 +61,7 @@ static void	_dispatch(int pid, int i)
 	pause();
 }
 
-static void	_send(int pid, char c, int i)
+static void	_send(int pid, unsigned char c, int i)
 {
 	if (!c)
 	{
