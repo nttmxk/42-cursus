@@ -25,7 +25,7 @@ void	sig_handler(int signo)
 	}
 }
 
-int	main()
+int	main(void)
 {
 	printf("Server PID: %d\n", getpid());
 	while (1)

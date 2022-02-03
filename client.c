@@ -73,7 +73,7 @@ void	_send(int pid, char c, int i)
 	dispatch(pid, c % 2);
 }
 
-void ft_send(int pid, char *s)
+void	ft_send(int pid, char *s)
 {
 	int	i;
 	int	size;
