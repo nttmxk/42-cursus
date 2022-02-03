@@ -29,18 +29,16 @@ size_t	ft_strlen(const char *s)
 		++i;
 	return (i);
 }
-
 //////////
 
-
-void ft_error(void)
+void	ft_error(void)
 {
-	write(1, "Input is incorrect.\n", 20);
-//	write(1, "[Server PID] [String]\n", 22);
+	write(2, "Input is incorrect.\n", 20);
+	write(2, "[Server PID] [String]\n", 22);
 	exit(1);
 }
 
-void ft_check_input(char *s)
+void	ft_check_input(char *s)
 {
 	int	i;
 
@@ -54,16 +52,16 @@ void ft_check_input(char *s)
 		ft_error();
 }
 
-void dispatch(int pid, int i)
+void	dispatch(int pid, int i)
 {
 	if (i == 0)
 		kill(pid, SIGUSR1);
 	else
 		kill(pid, SIGUSR2);
-	usleep(1000);
+	usleep(500);
 }
 
-void _send(int pid, char c, int i)
+void	_send(int pid, char c, int i)
 {
 	if (!c)
 	{
@@ -78,19 +76,18 @@ void _send(int pid, char c, int i)
 void ft_send(int pid, char *s)
 {
 	int	i;
-	int size;
+	int	size;
 
-	if (pid > PID_MAX) // chk
+	if (pid > PID_MAX)
 		ft_error();
 	size = ft_strlen(s);
 	i = -1;
 	while (++i < size)
 		_send(pid, s[i], 0);
-//	_send(pid, pid, 0);  // for bonus
-	_send(pid, 0, 0); // '\0'
+	_send(pid, 0, 0);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	if (argc != 3)
 		ft_error();
