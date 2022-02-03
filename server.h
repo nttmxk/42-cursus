@@ -20,4 +20,8 @@
 int		ft_printf(const char *fmt, ...);
 void	sig_handler(int signo);
 
+void	ft_error(void);
+void	print_pid(void);
+char	*ft_itoa(int n);
+
 #endif

@@ -16,19 +16,13 @@ int	main(void)
 {
 	struct sigaction	act1;
 
-	ft_printf("Server PID: %d\n", getpid());
+	print_pid();
 	set_sig(&act1);
 	sigaction(SIGUSR1, &act1, NULL);
 	sigaction(SIGUSR2, &act1, NULL);
 	while (1)
 		pause();
 	return (0);
-}
-
-void	ft_error(void)
-{
-	write(2, "Crash!\n", 7);
-	exit(1);
 }
 
 int	check_pid(siginfo_t *info, int *pid)
