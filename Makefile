@@ -6,22 +6,22 @@
 #    By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/03 13:07:26 by jinoh             #+#    #+#              #
-#    Updated: 2022/02/03 13:18:40 by jinoh            ###   ########.fr        #
+#    Updated: 2022/02/03 15:56:12 by jinoh            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_1					= server
 NAME_2					= client
 
-SRCS_1					= server.c
+SRCS_1					= server.c \
 
 SRCS_2					= client.c \
-						client_utils.c
+						  client_utils.c
 
-BNS_OBJS_1				= server_bonus.c
+BNS_OBJS_1				= server_bonus.c \
 
 BNS_OBJS_2				= client_bonus.c \
-						client_utils_bonus.c
+						  client_utils_bonus.c \
 
 OBJS_1					= $(SRCS_1:.c=.o)
 OBJS_2					= $(SRCS_2:.c=.o)

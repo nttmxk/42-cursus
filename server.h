@@ -6,7 +6,7 @@
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/03 12:48:32 by jinoh             #+#    #+#             */
-/*   Updated: 2022/02/03 12:48:33 by jinoh            ###   ########.fr       */
+/*   Updated: 2022/02/03 15:59:01 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <signal.h>
 
-int	ft_printf(const char *fmt, ...);
+int		ft_printf(const char *fmt, ...);
 void	sig_handler(int signo);
 
 #endif

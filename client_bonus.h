@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.h                                           :+:      :+:    :+:   */
+/*   client_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/03 12:48:21 by jinoh             #+#    #+#             */
-/*   Updated: 2022/02/03 12:48:22 by jinoh            ###   ########.fr       */
+/*   Created: 2022/02/03 15:58:26 by jinoh             #+#    #+#             */
+/*   Updated: 2022/02/03 15:58:46 by jinoh            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #ifndef CLIENT_BONUS_H
 # define CLIENT_BONUS_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <signal.h>
 # define PID_MAX 132768
 
-int	ft_isdigit(int c);
-int	ft_atoi(const char *str);
+int		ft_isdigit(int c);
+int		ft_atoi(const char *str);
 size_t	ft_strlen(const char *s);
 void	ft_error(void);
 void	ft_check_input(char *s);
