@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
 
 int	philo_start(t_info *info)
 {
-	pthread_t th[MAX_T]
+	pthread_t th[MAX_T];
 	t_arg arg;
 
 	if (pthread_mutex_init(&(info->mutex), NULL) || pthread_mutex_lock(&(info->mutex)))
