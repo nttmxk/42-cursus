@@ -37,8 +37,11 @@ int	philo_start(t_info *info)
 		exit(0); // NON
 }
 
-void *philo(t_arg *arg)
+void *philo(void *a)
 {
+	t_arg *arg;
+
+	arg = (t_arg *)a;
 	do {
 		take_chopsticks(arg);
 		print_info(arg->info, arg->i, 0); // taken a fork
