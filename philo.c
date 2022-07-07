@@ -18,11 +18,11 @@ int main(int argc, char *argv[])
 
 int	philo_start(t_info *info)
 {
-	pthread_t *philo;
+	pthread_t **th;
 	t_arg arg;
 
-	philo = malloc(sizeof(pthread_t) * (info->NOP + 1));
-	if (philo == NULL)
+	th = malloc(sizeof(pthread_t *) * info->NOP);
+	if (th == NULL)
 		return (1);
 	if (pthread_mutex_init(&(info->mutex), NULL) || pthread_mutex_lock(&(info->mutex)))
 		return (1);
@@ -30,7 +30,7 @@ int	philo_start(t_info *info)
 	for (int i = 0; i < info->NOP; ++i)
 	{
 		arg.i = (i + 1);
-		if (pthread_create(philo[i], NULL, philo, &arg) < 0)
+		if (pthread_create(th[i], NULL, philo, &arg) < 0)
 			exit(0); // NON
 	}
 	if (pthread_mutex_unlock(&(info->mutex)))
