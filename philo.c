@@ -1,10 +1,4 @@
 #include "philo.h"
-#include <stdio.h>
-
-#include <unistd.h>
-#include <pthread.h>
-#include <sys/time.h> // gettime
-#include <string.h> // memset
 
 int main(int argc, char *argv[])
 {
