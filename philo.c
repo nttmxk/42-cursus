@@ -109,7 +109,7 @@ int ft_error(void)
 {
 	printf("Arguments:\n"
 		   "number of philosophers\ntime to die\ntime to eat\n"
-		   "time_to_sleep\n[number of times each philosopher must eat]");
+		   "time_to_sleep\n[number of times each philosopher must eat]\n");
 	return (1);
 }
 
