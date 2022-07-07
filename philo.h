@@ -37,7 +37,7 @@ int handle_input(char *argv[], t_info *info);
 void *philo(t_arg *arg);
 void take_chopsticks(t_arg *arg);
 void print_info(t_info *info,int i, int type);
-size_t	ft_gettime(size_t start);
+size_t	ft_gettime(struct timeval start);
 
 
 /*

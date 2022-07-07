@@ -136,10 +136,12 @@ int handle_input(char *argv[], t_info *info) {
 	return (0);
 }
 
-size_t	ft_gettime(size_t start)
+size_t	ft_gettime(struct timeval s)
 {
 	struct timeval	now;
+	size_t			start;
 
+	start = s.tv_sec * 1000 * 1000 + s.tv_usec;
 	gettimeofday(&now, NULL); // if error, -1 returned
 	return (now.tv_sec * 1000 * 1000 + now.tv_usec - start);
 }
