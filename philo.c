@@ -18,12 +18,9 @@ int main(int argc, char *argv[])
 
 int	philo_start(t_info *info)
 {
-	pthread_t **th;
+	pthread_t th[MAX_T]
 	t_arg arg;
 
-	th = malloc(sizeof(pthread_t *) * info->NOP);
-	if (th == NULL)
-		return (1);
 	if (pthread_mutex_init(&(info->mutex), NULL) || pthread_mutex_lock(&(info->mutex)))
 		return (1);
 	arg.info = info;

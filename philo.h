@@ -7,7 +7,7 @@
 # include <pthread.h>
 # include <sys/time.h> // gettime
 # include <string.h> // memset
-
+# define MAX_T 500
 typedef struct s_info
 {
 	unsigned int NOP;
@@ -16,7 +16,7 @@ typedef struct s_info
 	unsigned int TTS;
 	unsigned int NOT;
 	unsigned int kill;
-	char fork[500];
+	char fork[MAX_T];
 	struct timeval start;
 	pthread_mutex_t mutex;
 }	t_info;
