@@ -37,7 +37,7 @@ int	philo_start(t_info *info)
 		exit(0); // NON
 }
 
-void philo(t_arg *arg)
+void *philo(t_arg *arg)
 {
 	do {
 		take_chopsticks(arg);
