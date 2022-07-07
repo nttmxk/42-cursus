@@ -27,7 +27,7 @@ int	philo_start(t_info *info)
 	if (pthread_mutex_init(&(info->mutex), NULL) || pthread_mutex_lock(&(info->mutex)))
 		return (1);
 	arg.info = info;
-	for (int i = 0; i < info->NOP; ++i)
+	for (int i = 0; i < (int)info->NOP; ++i)
 	{
 		arg.i = (i + 1);
 		if (pthread_create(th[i], NULL, philo, &arg) < 0)
