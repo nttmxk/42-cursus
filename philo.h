@@ -16,15 +16,15 @@ typedef struct s_info
 	unsigned int TTS;
 	unsigned int NOT;
 	unsigned int kill;
-	char fork[MAX_T];
-	struct timeval start;
+	size_t start;
 	pthread_mutex_t mutex;
+	char fork[MAX_T];
 }	t_info;
 
 typedef struct s_arg
 {
 	t_info			*info;
-	struct timeval	last_meal;
+	size_t			last_meal;
 	unsigned int	i;
 }	t_arg;
 
@@ -37,7 +37,7 @@ int		handle_input(char *argv[], t_info *info);
 void	*philo(void *a);
 void	take_chopsticks(t_arg *arg);
 void	put_chopsticks(t_arg *arg);
-void	print_info(t_info *info,int i, int type);
+void	print_info(t_info *info, unsigned int i, int type);
 void	check_starve(t_arg *arg);
 
 /*
@@ -51,7 +51,7 @@ int ft_error(void);
  */
 unsigned long long	ft_atol(const char *str);
 size_t				ft_gettime(struct timeval s);
-size_t				ft_getms(struct timeval s);
-void				print_info(t_info *info,int i, int type);
+size_t				ft_getms(void);
+void				print_info(t_info *info, unsigned int i, int type);
 
 #endif

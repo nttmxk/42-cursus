@@ -21,9 +21,9 @@ int handle_input(char *argv[], t_info *info) {
 	info->kill = 0;
 	if (i > 5)
 		info->NOT = (unsigned int) ft_atol(argv[5]);
-	gettimeofday(&(info->start), NULL); // error?
-	printf("time: %zu\n", ft_gettime(info->start));
-	memset(info->fork, 1, (info->NOP + 2) * sizeof(char)); // error?
+	info->start = ft_getms();
+	memset(info->fork, 0, (info->NOP + 2) * sizeof(char)); // error?
+	printf("%d\n", info->NOP + 2);
 	return (0);
 }
 
