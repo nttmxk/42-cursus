@@ -31,19 +31,27 @@ typedef struct s_arg
 /*
  * 	philo.c
  */
-int	philo_start(t_info *info);
-int ft_error(void);
-int handle_input(char *argv[], t_info *info);
-void *philo(void *a);
-void take_chopsticks(t_arg *arg);
-void print_info(t_info *info,int i, int type);
-size_t	ft_gettime(struct timeval s);
+int		philo_start(t_info *info);
+int		ft_error(void);
+int		handle_input(char *argv[], t_info *info);
+void	*philo(void *a);
+void	take_chopsticks(t_arg *arg);
+void	put_chopsticks(t_arg *arg);
+void	print_info(t_info *info,int i, int type);
+void	check_starve(t_arg *arg);
 
+/*
+ * 	philo_input.c
+ */
+int handle_input(char *argv[], t_info *info);
+int ft_error(void);
 
 /*
  * 	philo_utils.c
  */
 unsigned long long	ft_atol(const char *str);
-
+size_t				ft_gettime(struct timeval s);
+size_t				ft_getms(struct timeval s);
+void				print_info(t_info *info,int i, int type);
 
 #endif
