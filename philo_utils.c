@@ -14,20 +14,22 @@ unsigned long long	ft_atol(const char *str)
 
 void print_info(t_info *info, unsigned int i, int type)
 {
-	size_t t;
+	size_t	now;
 
-	t = ft_getms() - info->start;
+	now = ft_getms();
+	if (now == 0)
+		exit(1); // NON
 	pthread_mutex_lock(&(info->mutex));
 	if (type == 0)
-		printf("%zums %d has taken a fork\n", t, i);
+		printf("%zums %d has taken a fork\n", now - info->start, i);
 	else if (type == 1)
-		printf("%zums %d is eating\n", t, i);
+		printf("%zums %d is eating\n", now - info->start, i);
 	else if (type == 2)
-		printf("%zums %d is sleeping\n", t, i);
+		printf("%zums %d is sleeping\n", now - info->start, i);
 	else if (type == 3)
-		printf("%zums %d is thinking\n", t, i);
+		printf("%zums %d is thinking\n", now - info->start, i);
 	else
-		printf("%zums %d died\n", t, i);
+		printf("%zums %d died\n", now - info->start, i);
 	pthread_mutex_unlock(&(info->mutex));
 }
 
@@ -35,15 +37,7 @@ size_t ft_getms(void)
 {
 	struct timeval now;
 
-	gettimeofday(&now, NULL); // if error, -1 returned
+	if (gettimeofday(&now, NULL))
+		return (0);
 	return (now.tv_sec * 1000 + now.tv_usec / 1000);
 }
-
-//size_t	ft_gettime(struct timeval s)
-//{
-//	struct timeval	now;
-//
-//	gettimeofday(&now, NULL); // if error, -1 returned
-//	printf("%ld %ld %d %d\n", now.tv_sec, s.tv_sec, now.tv_usec, s.tv_usec);
-//	return ((now.tv_sec - s.tv_sec) * 1000 + (now.tv_usec - s.tv_usec) / 1000);
-//}
