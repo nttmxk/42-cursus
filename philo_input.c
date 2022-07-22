@@ -38,20 +38,21 @@ int	handle_input(char *argv[], t_info *info)
 
 static int	set_input(char *argv[], t_info *info, int i)
 {
-	info->NOP = (int) ft_atol(argv[1]);
-	if (info->NOP > 200)
+	info->nop = (int) ft_atol(argv[1]);
+	if (info->nop > 200)
 		return (1);
-	info->TTD = (int) ft_atol(argv[2]);
-	info->TTE = (int) ft_atol(argv[3]);
-	info->TTS = (int) ft_atol(argv[4]);
+	info->ttd = (int) ft_atol(argv[2]);
+	info->tte = (int) ft_atol(argv[3]);
+	info->tts = (int) ft_atol(argv[4]);
 	info->kill = 0;
 	if (i > 5)
-		info->NOT = (int) ft_atol(argv[5]);
+		info->not = (int) ft_atol(argv[5]);
 	else
-		info->NOT = -1;
+		info->not = -1;
+	info->not_p = 0;
 	info->start = ft_getms();
 	if (info->start == 0)
 		return (1);
-	memset(info->fork, 1, (info->NOP + 2) * sizeof(char));
+	memset(info->fork, 1, (info->nop + 2) * sizeof(char));
 	return (0);
 }

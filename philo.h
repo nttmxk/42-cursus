@@ -21,20 +21,21 @@
 # include <string.h> // memset
 # define MAX_T 300
 
-typedef struct	s_info
+typedef struct s_info
 {
-	int				NOP;
-	int				TTD;
-	int				TTE;
-	int				TTS;
-	int				NOT;
+	int				nop;
+	int				ttd;
+	int				tte;
+	int				tts;
+	int				not;
+	int 			not_p;
 	int				kill;
 	size_t			start;
 	pthread_mutex_t	mutex;
 	char			fork[MAX_T];
 }	t_info;
 
-typedef struct	s_arg
+typedef struct s_arg
 {
 	t_info	*info;
 	size_t	last_meal;
@@ -45,29 +46,24 @@ typedef struct	s_arg
 /*
  *	philo.c
  */
-int		philo_set(t_info *info);
-void	philo_monitor(t_info *info);
-
+int					philo_set(t_info *info);
+void				philo_monitor(t_info *info);
 /*
  * 	philo_input.c
  */
-int	handle_input(char *argv[], t_info *info);
-
+int					handle_input(char *argv[], t_info *info);
 /*
  * 	philo_lifecycle.c
  */
-void	*philo_start(void *a);
-void	take_chopsticks(t_arg *arg);
-void	put_chopsticks(t_arg *arg);
-
+void				*philo_start(void *a);
+void				take_chopsticks(t_arg *arg);
+void				put_chopsticks(t_arg *arg);
 /*
  * 	philo_lifecycle_utils.c
  */
-void	print_info(t_info *info, unsigned int i, int type);
-void	check_starve(t_arg *arg);
-int		ft_sleep(useconds_t t);
-
-
+void				print_info(t_info *info, unsigned int i, int type);
+void				check_starve(t_arg *arg);
+int					ft_sleep(useconds_t t);
 /*
  * 	philo_utils.c
  */
@@ -76,6 +72,5 @@ size_t				ft_getms(void);
 int					ft_error(t_info *info);
 int					ft_fail(t_info *info);
 void				*philo_err(t_info *info);
-
 
 #endif

@@ -33,8 +33,8 @@ int	philo_set(t_info *info)
 	if (pthread_mutex_init(&info->mutex, NULL)
 		|| pthread_mutex_lock(&info->mutex))
 		return (ft_fail(info));
-	i = 0;
-	while (i++ < info->NOP)
+	i = -1;
+	while (++i < info->nop)
 	{
 		arg[i].info = info;
 		arg[i].i = (i + 1);
@@ -52,7 +52,7 @@ int	philo_set(t_info *info)
 
 void	philo_monitor(t_info *info)
 {
-	while (!info->kill)
+	while (!info->kill && info->nop != info->not_p)
 	{
 		if (usleep(1))
 		{

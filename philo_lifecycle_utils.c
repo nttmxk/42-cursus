@@ -54,7 +54,7 @@ void	check_starve(t_arg *arg)
 		philo_err(arg->info);
 		return ;
 	}
-	if ((int)(now - arg->last_meal) >= arg->info->TTD)
+	if ((int)(now - arg->last_meal) >= arg->info->ttd)
 		print_info(arg->info, arg->i, 4);
 }
 
