@@ -51,16 +51,19 @@ void	put_chopsticks(t_arg *arg);
 /*
  * 	philo_lifecycle_utils.c
  */
+void	print_info(t_info *info, unsigned int i, int type);
 void	check_starve(t_arg *arg);
+int		ft_sleep(useconds_t t);
 
 
 /*
  * 	philo_utils.c
  */
 unsigned long long	ft_atol(const char *str);
-void				print_info(t_info *info, unsigned int i, int type);
 size_t				ft_getms(void);
 int					ft_error(t_info *info);
-int					ft_exit(t_info *info);
+int					ft_fail(t_info *info);
+void				*philo_err(t_info *info);
+
 
 #endif

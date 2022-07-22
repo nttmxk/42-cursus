@@ -12,31 +12,6 @@ unsigned long long	ft_atol(const char *str)
 	return (ret);
 }
 
-void print_info(t_info *info, unsigned int i, int type)
-{
-	size_t	now;
-
-	if (pthread_mutex_lock(&(info->mutex)))
-		ft_exit(info);
-	if (info->kill)
-		return ;
-	now = ft_getms();
-	if (now == 0)
-		ft_exit(info);
-	if (type == 0)
-		printf("%zums %d has taken a fork\n", now - info->start, i);
-	else if (type == 1)
-		printf("%zums %d is eating\n", now - info->start, i);
-	else if (type == 2)
-		printf("%zums %d is sleeping\n", now - info->start, i);
-	else if (type == 3)
-		printf("%zums %d is thinking\n", now - info->start, i);
-	else
-		printf("%zums %d died\n", now - info->start, i);
-	if (pthread_mutex_unlock(&(info->mutex)))
-		ft_exit(info);
-}
-
 size_t ft_getms(void)
 {
 	struct timeval now;
@@ -51,16 +26,26 @@ int	ft_error(t_info *info)
 	printf("Arguments:\n"
 		   "number of philosophers\ntime to die\ntime to eat\n"
 		   "time_to_sleep\n[number of times each philosopher must eat]\n");
-	return (ft_exit(info));
+	return (ft_fail(info));
 }
 
-int	ft_exit(t_info *info)
+int	ft_fail(t_info *info)
 {
 	info->kill = 1;
-	pthread_mutex_unlock(&(info->mutex));
-	usleep(100);
+	pthread_mutex_unlock(&info->mutex);
 	printf("Error has occurred.\n");
+	usleep(100);
 	free(info);
 	info = NULL;
 	return (1);
+}
+
+void *philo_err(t_info *info)
+{
+	if (info)
+	{
+		info->kill = 1;
+		pthread_mutex_unlock(&info->mutex);
+	}
+	return (0);
 }
