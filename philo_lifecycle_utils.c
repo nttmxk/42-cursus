@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_lifecycle_utils.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/22 15:33:57 by jinoh             #+#    #+#             */
+/*   Updated: 2022/07/22 15:33:58 by jinoh            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-void print_info(t_info *info, unsigned int i, int type)
+void	print_info(t_info *info, unsigned int i, int type)
 {
 	size_t	now;
 
@@ -32,7 +44,7 @@ void print_info(t_info *info, unsigned int i, int type)
 		philo_err(info);
 }
 
-void check_starve(t_arg *arg)
+void	check_starve(t_arg *arg)
 {
 	size_t	now;
 
@@ -42,11 +54,11 @@ void check_starve(t_arg *arg)
 		philo_err(arg->info);
 		return ;
 	}
-	if ((int)(now - arg->last_meal) >= arg->info->TTD) // starving check
+	if ((int)(now - arg->last_meal) >= arg->info->TTD)
 		print_info(arg->info, arg->i, 4);
 }
 
-int ft_sleep(useconds_t t)
+int	ft_sleep(useconds_t t)
 {
 	unsigned int	i;
 

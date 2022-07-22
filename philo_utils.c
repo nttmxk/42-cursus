@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/22 15:33:46 by jinoh             #+#    #+#             */
+/*   Updated: 2022/07/22 15:33:47 by jinoh            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 unsigned long long	ft_atol(const char *str)
 {
 	unsigned long long	ret;
-	int				i;
+	int					i;
 
 	i = 0;
 	ret = 0;
@@ -12,9 +24,9 @@ unsigned long long	ft_atol(const char *str)
 	return (ret);
 }
 
-size_t ft_getms(void)
+size_t	ft_getms(void)
 {
-	struct timeval now;
+	struct timeval	now;
 
 	if (gettimeofday(&now, NULL))
 		return (0);
@@ -24,8 +36,8 @@ size_t ft_getms(void)
 int	ft_error(t_info *info)
 {
 	printf("Arguments:\n"
-		   "number of philosophers\ntime to die\ntime to eat\n"
-		   "time_to_sleep\n[number of times each philosopher must eat]\n");
+		"number of philosophers\ntime to die\ntime to eat\n"
+		"time_to_sleep\n[number of times each philosopher must eat]\n");
 	return (ft_fail(info));
 }
 
@@ -40,7 +52,7 @@ int	ft_fail(t_info *info)
 	return (1);
 }
 
-void *philo_err(t_info *info)
+void	*philo_err(t_info *info)
 {
 	if (info)
 	{

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/22 15:33:24 by jinoh             #+#    #+#             */
+/*   Updated: 2022/07/22 15:33:25 by jinoh            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_info	*info;
 
@@ -16,16 +28,20 @@ int	philo_set(t_info *info)
 {
 	pthread_t		th[MAX_T];
 	t_arg			arg[MAX_T];
+	int				i;
 
-	if (pthread_mutex_init(&info->mutex, NULL) || pthread_mutex_lock(&info->mutex))
+	if (pthread_mutex_init(&info->mutex, NULL)
+		|| pthread_mutex_lock(&info->mutex))
 		return (ft_fail(info));
-	for (int i = 0; i < info->NOP; ++i)
+	i = 0;
+	while (i++ < info->NOP)
 	{
 		arg[i].info = info;
 		arg[i].i = (i + 1);
 		arg[i].num_meal = 0;
 		arg[i].last_meal = info->start;
-		if (pthread_create(&th[i], NULL, philo_start, &arg[i]) != 0 || pthread_detach(th[i]))
+		if (pthread_create(&th[i], NULL, philo_start, &arg[i]) != 0
+			|| pthread_detach(th[i]))
 			return (ft_fail(info));
 	}
 	if (pthread_mutex_unlock(&info->mutex))
@@ -34,17 +50,17 @@ int	philo_set(t_info *info)
 	return (0);
 }
 
-void philo_monitor(t_info *info)
+void	philo_monitor(t_info *info)
 {
 	while (!info->kill)
 	{
 		if (usleep(1))
 		{
-			printf("DEBUG: thread got killed\n");
 			info->kill = 1;
 		}
 	}
-	usleep(100);
+	pthread_mutex_unlock(&info->mutex);
+	usleep(10000);
 	free(info);
 	info = NULL;
 }

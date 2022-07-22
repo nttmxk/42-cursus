@@ -1,19 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_lifecycle.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/22 15:33:37 by jinoh             #+#    #+#             */
+/*   Updated: 2022/07/22 15:33:39 by jinoh            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 /*
  * 	idea:
  * 			[] pthread error handling
- * 			[] t_info free handling -> ft_exit(info)
+ * 			[] mutex_lock guard
  * 			[] action and print info merge, no need to be seperated.
- *			[] &info->mutex
  */
 
-void *philo_start(void *a)
+void	*philo_start(void *a)
 {
-	t_arg *arg;
+	t_arg	*arg;
 
 	arg = (t_arg *)a;
-	pthread_mutex_lock(&arg->info->mutex);
+	pthread_mutex_lock(&arg->info->mutex); // lock guard
 	pthread_mutex_unlock(&arg->info->mutex);
 	if (arg->info == NULL || arg->info->kill)
 		return (0);
@@ -22,33 +33,33 @@ void *philo_start(void *a)
 	while (!arg->info->kill && arg->num_meal != arg->info->NOT)
 	{
 		take_chopsticks(arg);
-		print_info(arg->info, arg->i, 0); // taken a fork
-		print_info(arg->info, arg->i, 1); // EATING
+		print_info(arg->info, arg->i, 0);
+		print_info(arg->info, arg->i, 1);
 		arg->num_meal++;
 		arg->last_meal = ft_getms();
 		if (arg->last_meal == 0 || usleep(arg->info->TTE * 1000))
 			return (philo_err(arg->info));
 		put_chopsticks(arg);
-		print_info(arg->info, arg->i, 2); // sleep;
+		print_info(arg->info, arg->i, 2);
 		if (usleep(arg->info->TTS * 1000))
 			return (philo_err(arg->info));
 		check_starve(arg);
-		print_info(arg->info, arg->i, 3); // thinking
-		usleep(100);
+		print_info(arg->info, arg->i, 3);
+		usleep(500);
 	}
 	return (0);
 }
 
-void take_chopsticks(t_arg *arg)
+void	take_chopsticks(t_arg *arg)
 {
 	unsigned int	i;
-	int cond;
+	int				cond;
 
 	cond = 1;
 	i = arg->i - 1;
 	while (cond && !arg->info->kill)
 	{
-		pthread_mutex_lock(&arg->info->mutex);
+		pthread_mutex_lock(&arg->info->mutex); // lock guard
 		if (arg->info->fork[i] && arg->info->fork[((i + 1) % arg->info->NOP)])
 		{
 			arg->info->fork[i] = 0;
@@ -58,7 +69,7 @@ void take_chopsticks(t_arg *arg)
 		pthread_mutex_unlock(&arg->info->mutex);
 		if (cond)
 		{
-			if (usleep(100))
+			if (usleep(50))
 				philo_err(arg->info);
 		}
 		if (arg->info->kill)
@@ -68,7 +79,7 @@ void take_chopsticks(t_arg *arg)
 	}
 }
 
-void put_chopsticks(t_arg *arg)
+void	put_chopsticks(t_arg *arg)
 {
 	unsigned int	i;
 
