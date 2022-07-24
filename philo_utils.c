@@ -46,7 +46,7 @@ int	ft_fail(t_info *info)
 	info->kill = 1;
 	pthread_mutex_unlock(&info->mutex);
 	printf("Error has occurred.\n");
-	usleep(100);
+	usleep(500);
 	free(info);
 	info = NULL;
 	return (1);

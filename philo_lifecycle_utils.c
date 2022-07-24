@@ -16,11 +16,8 @@ void	print_info(t_info *info, unsigned int i, int type)
 {
 	size_t	now;
 
-	if (pthread_mutex_lock(&info->mutex) || info->kill)
-	{
-		philo_err(info);
+	if (ft_lock(info) || info->kill)
 		return ;
-	}
 	now = ft_getms();
 	if (now == 0)
 	{
@@ -40,8 +37,7 @@ void	print_info(t_info *info, unsigned int i, int type)
 		printf("%zums %d died\n", now - info->start, i);
 		info->kill = 1;
 	}
-	if (pthread_mutex_unlock(&(info->mutex)))
-		philo_err(info);
+    ft_unlock(info);
 }
 
 void	check_starve(t_arg *arg)
@@ -58,15 +54,22 @@ void	check_starve(t_arg *arg)
 		print_info(arg->info, arg->i, 4);
 }
 
-int	ft_sleep(useconds_t t)
+int ft_lock(t_info *info)
 {
-	unsigned int	i;
+    if (pthread_mutex_lock(&info->mutex))
+    {
+        philo_err(arg->info);
+        return (1);
+    }
+    return (0);
+}
 
-	i = 0;
-	while (i++ < t)
-	{
-		if (usleep(1))
-			return (1);
-	}
-	return (0);
+int ft_unlock(t_info *info)
+{
+    if (pthread_mutex_unlock(&info->mutex))
+    {
+        philo_err(arg->info);
+        return (1);
+    }
+    return (0);
 }

@@ -56,14 +56,19 @@ int					handle_input(char *argv[], t_info *info);
  * 	philo_lifecycle.c
  */
 void				*philo_start(void *a);
-void				take_chopsticks(t_arg *arg);
+/*
+ * 	philo_lifecycle2.c
+ */
 void				put_chopsticks(t_arg *arg);
+void                eating(t_arg *arg);
 /*
  * 	philo_lifecycle_utils.c
  */
 void				print_info(t_info *info, unsigned int i, int type);
 void				check_starve(t_arg *arg);
-int					ft_sleep(useconds_t t);
+int                 ft_lock(t_info *info);
+int                 ft_unlock(t_info *info);
+
 /*
  * 	philo_utils.c
  */
