@@ -28,7 +28,7 @@ typedef struct s_info
 	int				tte;
 	int				tts;
 	int				not;
-	int 			not_p;
+	int				not_p;
 	int				kill;
 	size_t			start;
 	pthread_mutex_t	mutex;
@@ -60,14 +60,14 @@ void				*philo_start(void *a);
  * 	philo_lifecycle2.c
  */
 void				put_chopsticks(t_arg *arg);
-void                eating(t_arg *arg);
+void				eating(t_arg *arg);
 /*
  * 	philo_lifecycle_utils.c
  */
 void				print_info(t_info *info, unsigned int i, int type);
 void				check_starve(t_arg *arg);
-int                 ft_lock(t_info *info);
-int                 ft_unlock(t_info *info);
+int					ft_lock(t_info *info);
+int					ft_unlock(t_info *info);
 
 /*
  * 	philo_utils.c

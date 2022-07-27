@@ -25,19 +25,19 @@ void	print_info(t_info *info, unsigned int i, int type)
 		return ;
 	}
 	if (type == 0)
-		printf("%zums %d has taken a fork\n", now - info->start, i);
+		printf("%zu %d has taken a fork\n", now - info->start, i);
 	else if (type == 1)
-		printf("%zums %d is eating\n", now - info->start, i);
+		printf("%zu %d is eating\n", now - info->start, i);
 	else if (type == 2)
-		printf("%zums %d is sleeping\n", now - info->start, i);
+		printf("%zu %d is sleeping\n", now - info->start, i);
 	else if (type == 3)
-		printf("%zums %d is thinking\n", now - info->start, i);
+		printf("%zu %d is thinking\n", now - info->start, i);
 	else
 	{
-		printf("%zums %d died\n", now - info->start, i);
+		printf("%zu %d died\n", now - info->start, i);
 		info->kill = 1;
 	}
-    ft_unlock(info);
+	ft_unlock(info);
 }
 
 void	check_starve(t_arg *arg)
@@ -54,22 +54,22 @@ void	check_starve(t_arg *arg)
 		print_info(arg->info, arg->i, 4);
 }
 
-int ft_lock(t_info *info)
+int	ft_lock(t_info *info)
 {
-    if (pthread_mutex_lock(&info->mutex))
-    {
-        philo_err(arg->info);
-        return (1);
-    }
-    return (0);
+	if (pthread_mutex_lock(&info->mutex))
+	{
+		philo_err(info);
+		return (1);
+	}
+	return (0);
 }
 
-int ft_unlock(t_info *info)
+int	ft_unlock(t_info *info)
 {
-    if (pthread_mutex_unlock(&info->mutex))
-    {
-        philo_err(arg->info);
-        return (1);
-    }
-    return (0);
+	if (pthread_mutex_unlock(&info->mutex))
+	{
+		philo_err(info);
+		return (1);
+	}
+	return (0);
 }

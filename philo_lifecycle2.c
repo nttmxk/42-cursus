@@ -12,23 +12,23 @@
 
 #include "philo.h"
 
-void eating(t_arg *arg)
+void	eating(t_arg *arg)
 {
-    print_info(arg->info, arg->i, 1);
-    arg->num_meal++;
-    arg->last_meal = ft_getms();
+	print_info(arg->info, arg->i, 1);
+	arg->num_meal++;
+	arg->last_meal = ft_getms();
 }
 
 void	put_chopsticks(t_arg *arg)
 {
-    unsigned int	i;
+	unsigned int	i;
 
-    i = arg->i - 1;
-    if (ft_lock(arg->info))
-        return ;
-    arg->info->fork[i] = 1;
-    arg->info->fork[((i + 1) % arg->info->nop)] = 1;
-    if (ft_unlock(arg->info))
-        return ;
-    print_info(arg->info, arg->i, 2);
+	i = arg->i - 1;
+	if (ft_lock(arg->info))
+		return ;
+	arg->info->fork[i] = 1;
+	arg->info->fork[((i + 1) % arg->info->nop)] = 1;
+	if (ft_unlock(arg->info))
+		return ;
+	print_info(arg->info, arg->i, 2);
 }
