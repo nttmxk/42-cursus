@@ -52,12 +52,15 @@ int	ft_fail(t_info *info)
 	return (1);
 }
 
-void	*philo_err(t_info *info)
+void	*philo_err(t_info *info, int i)
 {
 	if (info)
 	{
 		info->kill = 1;
-		pthread_mutex_unlock(&info->mutex);
+		if (i == -1)
+			pthread_mutex_unlock(&info->mutex);
+		else
+			pthread_mutex_unlock(&info->fork[i]);
 	}
 	return (0);
 }

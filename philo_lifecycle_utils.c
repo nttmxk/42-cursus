@@ -16,12 +16,12 @@ void	print_info(t_info *info, unsigned int i, int type)
 {
 	size_t	now;
 
-	if (ft_lock(info) || info->kill)
+	if (ft_lock(info, -1) || info->kill)
 		return ;
 	now = ft_getms();
 	if (now == 0)
 	{
-		philo_err(info);
+		philo_err(info, -1);
 		return ;
 	}
 	if (type == 0)
@@ -37,7 +37,7 @@ void	print_info(t_info *info, unsigned int i, int type)
 		printf("%zu %d died\n", now - info->start, i);
 		info->kill = 1;
 	}
-	ft_unlock(info);
+	ft_unlock(info, -1);
 }
 
 void	check_starve(t_arg *arg)
@@ -47,28 +47,69 @@ void	check_starve(t_arg *arg)
 	now = ft_getms();
 	if (now == 0)
 	{
-		philo_err(arg->info);
+		philo_err(arg->info, -1);
 		return ;
 	}
 	if ((int)(now - arg->last_meal) >= arg->info->ttd)
+	{
 		print_info(arg->info, arg->i, 4);
+		ft_unlock(arg->info, arg->i);
+		ft_unlock(arg->info, (arg->i + 1) % arg->info->nop);
+	}
 }
 
-int	ft_lock(t_info *info)
+int	ft_usleep(useconds_t microseconds)
 {
-	if (pthread_mutex_lock(&info->mutex))
+	size_t	target;
+	size_t	now;
+
+	target = ft_getms() + microseconds / 1000;
+	if (target == 0)
+		return (1);
+	while (1)
 	{
-		philo_err(info);
+		now = ft_getms();
+		if (now == 0)
+			return (1);
+		if (target < now)
+			break ;
+		if (usleep(180))
+			return (1);
+	}
+	return (0);
+}
+
+int	ft_lock(t_info *info, int i)
+{
+	if (i == -1)
+	{
+		if (pthread_mutex_lock(&info->mutex))
+		{
+			philo_err(info, i);
+			return (1);
+		}
+	}
+	else if (pthread_mutex_lock(&info->fork[i]))
+	{
+		philo_err(info, i);
 		return (1);
 	}
 	return (0);
 }
 
-int	ft_unlock(t_info *info)
+int	ft_unlock(t_info *info, int i)
 {
-	if (pthread_mutex_unlock(&info->mutex))
+	if (i == -1)
 	{
-		philo_err(info);
+		if (pthread_mutex_unlock(&info->mutex))
+		{
+			philo_err(info, i);
+			return (1);
+		}
+	}
+	else if (pthread_mutex_unlock(&info->fork[i]))
+	{
+		philo_err(info, i);
 		return (1);
 	}
 	return (0);

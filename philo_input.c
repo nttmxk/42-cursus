@@ -51,8 +51,7 @@ static int	set_input(char *argv[], t_info *info, int i)
 		info->not = -1;
 	info->not_p = 0;
 	info->start = ft_getms();
-	if (info->start == 0)
+	if (info->start == 0 || info->nop == 0 || info->not == 0)
 		return (1);
-	memset(info->fork, 1, (info->nop + 2) * sizeof(char));
 	return (0);
 }

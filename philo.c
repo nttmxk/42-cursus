@@ -36,6 +36,8 @@ int	philo_set(t_info *info)
 	i = -1;
 	while (++i < info->nop)
 	{
+		if (pthread_mutex_init(&info->fork[i], NULL))
+			return (ft_fail(info));
 		arg[i].info = info;
 		arg[i].i = (i + 1);
 		arg[i].num_meal = 0;
@@ -46,38 +48,19 @@ int	philo_set(t_info *info)
 	}
 	if (pthread_mutex_unlock(&info->mutex))
 		ft_fail(info);
-	///////////////test
-	size_t now;
-	int k;
-	while (!usleep(1000 * 50))
-	{
-		now = ft_getms();
-		k = -1;
-		printf("%zu ", now - info->start);
-		while (++k < info->nop)
-		{
-			if (info->fork[k] == 1)
-				printf("O ");
-			else
-				printf("X ");
-//			printf("%d ", info->fork[k]);
-			printf("%d ", k + 1);
-		}
-		printf("\n");
-	}
-	/////////////////test
-//	philo_monitor(info);
+	philo_monitor(info, &arg[0]);
 	return (0);
 }
 
-void	philo_monitor(t_info *info)
+void	philo_monitor(t_info *info, t_arg *arg)
 {
+	int	i;
+
 	while (!info->kill && info->nop != info->not_p)
 	{
-		if (usleep(1))
-		{
-			info->kill = 1;
-		}
+		i = -1;
+		while (++i < info->nop && !info->kill)
+			check_starve(&arg[i]);
 	}
 	pthread_mutex_unlock(&info->mutex);
 	usleep(10000);

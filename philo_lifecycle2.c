@@ -36,15 +36,8 @@ static void	put_fore(t_arg *arg)
 	unsigned int	i;
 
 	i = arg->i - 1;
-	if (ft_lock(arg->info))
-		return ;
-	arg->info->fork[i] = 1;
-	if (ft_unlock(arg->info))
-		return ;
-	if (ft_lock(arg->info))
-		return ;
-	arg->info->fork[((i + 1) % arg->info->nop)] = 1;
-	if (ft_unlock(arg->info))
+	if (ft_unlock(arg->info, i)
+		|| ft_unlock(arg->info, (i + 1) % arg->info->nop))
 		return ;
 }
 
@@ -53,14 +46,7 @@ static void	put_foro(t_arg *arg)
 	unsigned int	i;
 
 	i = arg->i - 1;
-	if (ft_lock(arg->info))
-		return ;
-	arg->info->fork[((i + 1) % arg->info->nop)] = 1;
-	if (ft_unlock(arg->info))
-		return ;
-	if (ft_lock(arg->info))
-		return ;
-	arg->info->fork[i] = 1;
-	if (ft_unlock(arg->info))
+	if (ft_unlock(arg->info, (i + 1) % arg->info->nop)
+		|| ft_unlock(arg->info, i))
 		return ;
 }

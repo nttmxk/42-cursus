@@ -32,7 +32,7 @@ typedef struct s_info
 	int				kill;
 	size_t			start;
 	pthread_mutex_t	mutex;
-	char			fork[MAX_T];
+	pthread_mutex_t	fork[MAX_T];
 }	t_info;
 
 typedef struct s_arg
@@ -47,7 +47,7 @@ typedef struct s_arg
  *	philo.c
  */
 int					philo_set(t_info *info);
-void				philo_monitor(t_info *info);
+void				philo_monitor(t_info *info, t_arg *arg);
 /*
  * 	philo_input.c
  */
@@ -66,9 +66,9 @@ void				eating(t_arg *arg);
  */
 void				print_info(t_info *info, unsigned int i, int type);
 void				check_starve(t_arg *arg);
-int					ft_lock(t_info *info);
-int					ft_unlock(t_info *info);
-
+int					ft_lock(t_info *info, int i);
+int					ft_unlock(t_info *info, int i);
+int					ft_usleep(useconds_t microseconds);
 /*
  * 	philo_utils.c
  */
@@ -76,6 +76,6 @@ unsigned long long	ft_atol(const char *str);
 size_t				ft_getms(void);
 int					ft_error(t_info *info);
 int					ft_fail(t_info *info);
-void				*philo_err(t_info *info);
+void				*philo_err(t_info *info, int i);
 
 #endif
