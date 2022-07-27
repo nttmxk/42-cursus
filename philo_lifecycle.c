@@ -61,7 +61,7 @@ static int	philo_before_start(t_arg *arg)
 	}
 	if (arg->info == NULL || arg->info->kill)
 		return (1);
-	if (arg->i % 2 == 0 && usleep(100))
+	if (arg->i % 2 == 0 && usleep(1000 * 5))
 	{
 		philo_err(arg->info);
 		return (1);
@@ -128,11 +128,11 @@ static void	take_foro(t_arg *arg)
 		}
 		if (ft_unlock(arg->info))
 			return ;
-//        if (cond)
-//        {
-//            if (usleep(50))
-//                philo_err(arg->info);
-//        }
+//		if (cond)
+//		{
+//			if (usleep(50))
+//				philo_err(arg->info);
+//		}
 		check_starve(arg);
 	}
 }

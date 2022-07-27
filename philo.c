@@ -46,7 +46,27 @@ int	philo_set(t_info *info)
 	}
 	if (pthread_mutex_unlock(&info->mutex))
 		ft_fail(info);
-	philo_monitor(info);
+	///////////////test
+	size_t now;
+	int k;
+	while (!usleep(1000 * 50))
+	{
+		now = ft_getms();
+		k = -1;
+		printf("%zu ", now - info->start);
+		while (++k < info->nop)
+		{
+			if (info->fork[k] == 1)
+				printf("O ");
+			else
+				printf("X ");
+//			printf("%d ", info->fork[k]);
+			printf("%d ", k + 1);
+		}
+		printf("\n");
+	}
+	/////////////////test
+//	philo_monitor(info);
 	return (0);
 }
 
