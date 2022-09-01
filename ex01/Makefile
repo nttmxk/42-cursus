@@ -6,7 +6,7 @@ SRCS =	Contact.cpp \
 		PhoneBook.cpp \
 		main.cpp
 
-OBJS = $(SRCS:%.c=%.o)
+OBJS = $(SRCS:%.cpp=%.o)
 
 %.o: %.c
 		$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)

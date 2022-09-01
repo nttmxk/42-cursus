@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS =	megaphone.cpp
 
-OBJS = $(SRCS:%.c=%.o)
+OBJS = $(SRCS:%.cpp=%.o)
 
 %.o: %.c
 		$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)

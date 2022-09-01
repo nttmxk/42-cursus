@@ -5,7 +5,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS =	tests.cpp \
 		Account.cpp
 
-OBJS = $(SRCS:%.c=%.o)
+OBJS = $(SRCS:%.cpp=%.o)
 
 %.o: %.c
 		$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)

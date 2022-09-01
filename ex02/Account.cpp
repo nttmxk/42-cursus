@@ -2,6 +2,11 @@
 #include <ctime>
 #include <iostream>
 
+int Account::_nbAccounts = 0;
+int Account::_totalAmount = 0;
+int Account::_totalNbDeposits = 0;
+int Account::_totalNbWithdrawals = 0;
+
 int Account::getNbAccounts()
 {
 	return (_nbAccounts);
@@ -86,6 +91,7 @@ bool Account::makeWithdrawal(int withdrawal)
 {
 	if (checkAmount() < withdrawal)
 	{
+		_displayTimestamp();
 		std::cout << \
     	"index:" << _accountIndex << \
     	";p_amount:" << checkAmount() << \
