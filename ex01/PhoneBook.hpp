@@ -11,9 +11,9 @@ class PhoneBook {
 		int		len;
 		int 	last;
 		void 	printContact(int i);
+		void 	printBook();
 	public:
 		PhoneBook();
-		void 	printBook();
 		void	searchContact();
 		void 	addContact();
 };
