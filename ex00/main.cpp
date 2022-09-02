@@ -1,0 +1,21 @@
+#include "Zombie.hpp"
+
+int main()
+{
+	Zombie *ted;
+	Zombie *julia;
+
+	ted = newZombie("Ted");
+	ted->announce();
+
+	julia = newZombie("Julia");
+	julia->announce();
+
+	randomChump("Maria");
+	randomChump("Timmie");
+
+	delete julia;
+	delete ted;
+
+	return (0);
+}
