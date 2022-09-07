@@ -26,20 +26,19 @@ int	main(int argc, char *argv[])
 
 	std::string	line;
 	size_t		pos;
-	size_t		rPos = 0;
 	size_t		rSize = std::strlen(argv[2]);
 	while (std::getline(ifs, line))
 	{
 		while (true)
 		{
-			pos = line.find(argv[2], rPos);
+			pos = line.find(argv[2]);
 			if (pos == std::string::npos)
 			{
-				ofs << line.substr(rPos, line.length() - rPos) << '\n';
+				ofs << line << '\n';
 				break;
 			}
-			ofs << line.substr(rPos, pos) << argv[3];
-			rPos = pos + rSize;
+			ofs << line.substr(0, pos) << argv[3];
+			line = line.substr(pos + rSize);
 		}
 	}
 	ifs.close();
