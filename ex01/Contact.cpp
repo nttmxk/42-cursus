@@ -15,16 +15,26 @@
 void	Contact::enterContact()
 {
 	std::cout << "Enter Contact Info\n";
+
 	std::cout << "Firstname: ";
-	std::cin >> firstname;
+	std::cin >> std::ws;
+	std::getline(std::cin, firstname);
+
 	std::cout << "Lastname: ";
-	std::cin >> lastname;
+	std::cin >> std::ws;
+	std::getline(std::cin, lastname);
+
 	std::cout << "Nickname: ";
-	std::cin >> nickname;
+	std::cin >> std::ws;
+	std::getline(std::cin, nickname);
+
 	std::cout << "Phone Number: ";
-	std::cin >> phonenum;
+	std::cin >> std::ws;
+	std::getline(std::cin, phonenum);
+
 	std::cout << "darkest secret: ";
-	std::cin >> secret;
+	std::cin >> std::ws;
+	std::getline(std::cin, secret);
 	std::cout << "Created\n";
 }
 
@@ -34,6 +44,16 @@ void 	Contact::printContact()
 	printByFormat(lastname);
 	printByFormat(nickname);
 	std::cout << '\n';
+}
+
+void 	Contact::printInfo()
+{
+	std::cout <<
+	"Firstname: " + firstname + '\n' +
+	"Lastname: "+ lastname + '\n' +
+	"Nickname: "+ nickname + '\n' +
+	"Phone Number: "+ phonenum + '\n' +
+	"Darkest Secret: "+ secret + '\n';
 }
 
 void 	Contact::printByFormat(std::string str)

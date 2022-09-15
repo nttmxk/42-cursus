@@ -29,6 +29,7 @@ class Contact {
 	public:
 		void		enterContact();
 		void		printContact();
+		void 		printInfo();
 };
 
 #endif

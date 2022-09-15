@@ -34,15 +34,14 @@ void	PhoneBook::searchContact()
 {
 	int	i;
 
-	std::cout << "Enter an Index: ";
+	std::cout << "Enter an Index: \n";
+	printBook();
 	std::cin >> i;
+	std::cin.ignore(); // to flush the buffer
 	if (!std::cin || i < 0 || i >= len)
 		std::cout << "Wrong Input!\n";
 	else
-	{
-		printBook();
-		printContact(i);
-	}
+		contact[i].printInfo();
 }
 
 void 	PhoneBook::printBook()
@@ -50,16 +49,16 @@ void 	PhoneBook::printBook()
 	int i;
 
 	i = -1;
-	std::cout << std::setw(10) << "index" << '|' << \
-		std::setw(10) << "first name" << '|' << \
-		std::setw(10) << "last name" << '|' << \
-		std::setw(10) << "nick name" << '|' << '\n';
+	std::cout << "     index" << '|' << \
+	"first name" << '|' << \
+	" last name" << '|' << \
+	" nick name" << '|' << '\n';
 	while (++i < len)
 		printContact(i);
 }
 
 void	PhoneBook::printContact(int i)
 {
-	std::cout << std::setw(10) << i << '|';
+	std::cout << "         " << i << '|';
 	contact[i].printContact();
 }

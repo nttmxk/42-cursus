@@ -20,8 +20,15 @@ int main(void)
 	while (1)
 	{
 		std::cout << "Command: ";
-		std::cin >> str;
-		if (str == "ADD")
+		std::cin >> std::ws;
+		std::getline(std::cin, str);
+		if (std::cin.eof())
+		{
+			std::cout << '\n';
+			std::cin.clear();
+			std::clearerr(stdin);
+		}
+		else if (str == "ADD")
 			book.addContact();
 		else if (str == "SEARCH")
 			book.searchContact();
