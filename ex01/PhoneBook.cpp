@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinoh <jinoh@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/15 14:42:37 by jinoh             #+#    #+#             */
+/*   Updated: 2022/09/15 14:42:37 by jinoh            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook()
@@ -18,7 +30,6 @@ void 	PhoneBook::addContact()
 		len++;
 }
 
-
 void	PhoneBook::searchContact()
 {
 	int	i;
@@ -26,7 +37,7 @@ void	PhoneBook::searchContact()
 	std::cout << "Enter an Index: ";
 	std::cin >> i;
 	if (!std::cin || i < 0 || i >= len)
-		std::cout<< "Wrong Input!\n";
+		std::cout << "Wrong Input!\n";
 	else
 	{
 		printBook();
