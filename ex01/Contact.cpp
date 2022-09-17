@@ -35,7 +35,13 @@ void	Contact::enterContact()
 	std::cout << "darkest secret: ";
 	std::cin >> std::ws;
 	std::getline(std::cin, secret);
-	std::cout << "Created\n";
+	if (std::cin.eof())
+	{
+		std::cout << "\n^D Error\n";
+		exit(1);
+	}
+	else
+		std::cout << "Created\n";
 }
 
 void 	Contact::printContact()

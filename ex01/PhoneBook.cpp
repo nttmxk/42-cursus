@@ -34,14 +34,18 @@ void	PhoneBook::searchContact()
 {
 	int	i;
 
-	std::cout << "Enter an Index: \n";
 	printBook();
+	std::cout << "Enter an Index: \n";
 	std::cin >> i;
-	std::cin.ignore(); // to flush the buffer
-	if (!std::cin || i < 0 || i >= len)
+	if (std::cin.fail() || i < 0 || i >= len)
+	{
+		std::cin.clear();
 		std::cout << "Wrong Input!\n";
-	else
+	}
+	else {
 		contact[i].printInfo();
+	}
+	std::cin.ignore(); // to flush the buffer
 }
 
 void 	PhoneBook::printBook()
