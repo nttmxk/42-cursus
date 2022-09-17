@@ -1,7 +1,13 @@
 #include "Zombie.hpp"
 
+void	check_leak(void)
+{
+	system("leaks brainz");
+}
+
 int main()
 {
+//	atexit(check_leak);
 	Zombie *ted;
 	Zombie *julia;
 
