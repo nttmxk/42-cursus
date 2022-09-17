@@ -1,7 +1,13 @@
 #include "Zombie.hpp"
 
+void	check_leak(void)
+{
+	system("leaks brainz");
+}
+
 int main()
 {
+//	atexit(check_leak);
 	int	N = 10;
 	Zombie* zombies = zombieHorde(N, "Zombies");
 
