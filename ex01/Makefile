@@ -17,10 +17,10 @@ $(NAME): $(OBJS)
 all : $(NAME)
 
 clean:
-		rm -rf $(OBJS)
+		@rm -rf $(OBJS)
 
 fclean: clean
-		rm -rf $(NAME)
+		@rm -rf $(NAME)
 
 re:	fclean all
 
