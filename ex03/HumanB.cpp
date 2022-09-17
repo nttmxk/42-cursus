@@ -3,6 +3,7 @@
 HumanB::HumanB(std::string name)
 {
 	this->name = name;
+	this->weapon = nullptr;
 }
 
 void HumanB::attack()
