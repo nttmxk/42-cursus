@@ -1,7 +1,13 @@
 #include "Harl.hpp"
 
+void	check_leak(void)
+{
+	system("leaks harl_2");
+}
+
 int main()
 {
+	atexit(check_leak);
 	Harl harl = Harl();
 
 	harl.complain("DEBUG");
