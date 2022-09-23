@@ -70,12 +70,8 @@ float Fixed::toFloat(void) const
 {
 	float	n;
 
-	/*
-	 * orig:	1bit 7bit 24bit
-	 * fixed:	1bit 23bit 8bit(fract)
-	 */
 	n = float(this->value) / (1 << fract);
-	return (n); // not yet
+	return (n);
 }
 
 int Fixed::toInt(void) const
