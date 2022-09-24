@@ -30,6 +30,7 @@ Fixed& Fixed::operator=(const Fixed &orig)
 	value = orig.getRawBits();
 	return (*this);
 }
+
 Fixed::~Fixed()
 {
 	std::cout << "Destructor called\n";
