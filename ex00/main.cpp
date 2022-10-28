@@ -13,13 +13,22 @@
 #include "Bureaucrat.hpp"
 
 int main( void ) {
+	try
+	{
+		Bureaucrat a;
+		Bureaucrat b("Kane", 2);
+		Bureaucrat c("Son", 149);
 
-	Bureaucrat a;
-	Bureaucrat b("Kane", 3);
-	Bureaucrat c("Son", 148);
-	Bureaucrat d("Clem");
-
-	std::cout << a << b << c << d;
-
+		std::cout << a << b << c;
+		b.incrementGrade();
+		b.decrementGrade();
+		b.incrementGrade();
+		c.decrementGrade();
+		c.decrementGrade();
+	}
+	catch(const std::exception &e)
+	{
+		std::cout << e.what();
+	}
 	return 0;
 }

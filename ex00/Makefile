@@ -17,7 +17,7 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 SRCS =	Bureaucrat.cpp \
 		main.cpp
 
-		OBJS = $(SRCS:%.cpp=%.o)
+OBJS = $(SRCS:%.cpp=%.o)
 
 %.o: %.cpp
 		$(CC) $(CFLAGS) -c $< -o $(<:.cpp=.o)
