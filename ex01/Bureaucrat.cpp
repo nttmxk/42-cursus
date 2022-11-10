@@ -1,13 +1,14 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat(): name("Jon Doe"), grade(75)
 {
-	std::cout << "[Bureaucrat] Default constructor called\n";
+//	std::cout << "[Bureaucrat] Default constructor called\n";
 }
 
 Bureaucrat::Bureaucrat(std::string const &name, int grade): name(name), grade(grade)
 {
-	std::cout << "[Bureaucrat] constructor called\n";
+//	std::cout << "[Bureaucrat] constructor called\n";
 	if (grade < highestGrade)
 		throw (GradeTooHighException());
 	if (grade > lowestGrade)
@@ -16,13 +17,13 @@ Bureaucrat::Bureaucrat(std::string const &name, int grade): name(name), grade(gr
 
 Bureaucrat::Bureaucrat(const Bureaucrat &src)
 {
-	std::cout << "[Bureaucrat] Copy constructor called\n";
+//	std::cout << "[Bureaucrat] Copy constructor called\n";
 	*this = src;
 }
 
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &src)
 {
-	std::cout << "[Bureaucrat] Copy assignment operator called\n";
+//	std::cout << "[Bureaucrat] Copy assignment operator called\n";
 	*const_cast<std::string*>(&name) = src.getName();
 	grade = src.getGrade();
 	return (*this);
@@ -65,16 +66,16 @@ void Bureaucrat::decrementGrade()
 		throw (GradeTooLowException());
 }
 
-void Bureaucrat::signForm(const Form &src)
+void Bureaucrat::signForm(Form &src)
 {
 	try {
-		src.beSigned(this);
+		src.beSigned(*this);
+		std::cout << this->getName() << " signed " << src.getName() << '\n';
 	} catch (const std::exception &e)
 	{
 		std::cout << this->getName() << " couldn't sign "
-		<< src.getName() << " because" << e.what();
+		<< src.getName() << " because " << e.what();
 	}
-	std::cout << this->getName() << "signed " << src.getName() << '\n';
 }
 
 const char* Bureaucrat::GradeTooHighException::what(void) const throw()
