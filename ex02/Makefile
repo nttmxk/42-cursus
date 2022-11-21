@@ -18,9 +18,8 @@ SRCS =	Bureaucrat.cpp \
 		Form.cpp \
 		ShrubberyCreationForm.cpp \
 		main.cpp \
-#		PresidentialPardonForm.cpp \
-#		RobotomyRequestForm.cpp \
-
+		RobotomyRequestForm.cpp \
+		PresidentialPardonForm.cpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 

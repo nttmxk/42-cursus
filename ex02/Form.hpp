@@ -34,7 +34,7 @@ public:
 	const std::string &getName() const;
 	int getGradeSign() const;
 	int getGradeExec() const;
-	virtual void execute(Bureaucrat const &executor) const = 0;
+	virtual int execute(Bureaucrat const &executor) const = 0;
 };
 
 std::ostream& operator<<(std::ostream& outputStream, const Form &src);
