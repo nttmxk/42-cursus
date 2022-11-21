@@ -16,8 +16,14 @@
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
+void check_leak(void)
+{
+	system("leaks bureaucrat");
+}
+
 int main(void)
 {
+	atexit(check_leak);
 	Intern someRandomIntern;
 	Bureaucrat a("Master", 1);
 	Bureaucrat b("Kane", 19);
