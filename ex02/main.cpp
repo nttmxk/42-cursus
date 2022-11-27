@@ -2,8 +2,15 @@
 #include <Array.hpp>
 
 #define MAX_VAL 750
+
+void check_leaks()
+{
+	system("leaks array");
+}
+
 int main(int, char**)
 {
+	atexit(check_leaks);
 	Array<int> numbers(MAX_VAL);
 	int* mirror = new int[MAX_VAL];
 	srand(time(NULL));
