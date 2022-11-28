@@ -6,17 +6,17 @@
 template <typename T>
 class Array {
 private:
-    unsigned int	size;
+    unsigned int	_size;
     T*				arr;
 
 public:
     Array() {
-    	size = 0;
+    	_size = 0;
     	arr = nullptr;
 	}
 
     Array(unsigned int n) {
-    	size = n;
+    	_size = n;
     	if (n != 0)
 			arr = new T[n];
     	else
@@ -24,10 +24,10 @@ public:
 	}
 
     Array(const Array &orig) {
-		size = orig.size;
-		if (size != 0)
-			arr = new T[size];
-		for (unsigned int i = 0; i < size; ++i)
+		_size = orig._size;
+		if (_size != 0)
+			arr = new T[_size];
+		for (unsigned int i = 0; i < _size; ++i)
 			arr[i] = orig.arr[i];
 	}
 
@@ -37,10 +37,10 @@ public:
 				delete[] arr;
 				arr = nullptr;
 			}
-			size = orig.size;
-			if (size != 0)
-				arr = new T[size];
-			for (unsigned int i = 0; i < size; ++i) {
+			_size = orig._size;
+			if (_size != 0)
+				arr = new T[_size];
+			for (unsigned int i = 0; i < _size; ++i) {
 				arr[i] = orig.arr[i];
 			}
 		}
@@ -55,13 +55,19 @@ public:
 	}
 
 	T& operator[](unsigned int i) {
-    	if (i >= size)
-    		throw OutOfRangeException();
-    	return (arr[i]);
-    }
+		if (i >= _size)
+			throw OutOfRangeException();
+		return (arr[i]);
+	}
+
+	const T& operator[](unsigned int i) const {
+		if (i >= _size)
+			throw OutOfRangeException();
+		return (arr[i]);
+	}
 
     unsigned int size() const {
-    	return (size);
+    	return (_size);
     }
 
 class OutOfRangeException: public std::exception{
