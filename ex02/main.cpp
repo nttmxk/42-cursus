@@ -9,7 +9,7 @@ void check_leaks()
 }
 
 template <typename T>
-void printArr(Array<T> array)
+void printArr(Array<T> &array)
 {
 	std::cout << "Printing Array\n";
 	for (unsigned int i = 0; i < array.size(); ++i)
@@ -19,7 +19,33 @@ void printArr(Array<T> array)
 
 int main(int, char**)
 {
-//	atexit(check_leaks);
+	atexit(check_leaks);
+	/////////////////////////////
+	Array<char> test;
+	Array<char> testWithSize(5);
+	printArr(testWithSize);
+
+	try
+	{
+		for (unsigned int i = 0; i < 6; ++i)
+			testWithSize[i] = 'a' + i;
+	}
+	catch(const std::exception& e) {
+		std::cerr << e.what() << '\n';
+	}
+	printArr(testWithSize);
+
+	std::cout << "test = testWithSize\n";
+	test = testWithSize;
+	std::cout << "test2(testWithSize)\n";
+	Array<char> test2(testWithSize);
+	std::cout << "Calling printArr...\n";
+	printArr(test);
+	printArr(test2);
+	/////////////////////////////
+
+
+
 	Array<int> numbers(MAX_VAL);
 	int* mirror = new int[MAX_VAL];
 	srand(time(NULL));
@@ -35,8 +61,8 @@ int main(int, char**)
 		Array<int> test(tmp);
 		///////////////////////
 		std::cout << "Testing in the scope\n";
-		printArr(tmp);
-		printArr(test);
+//		printArr(tmp);
+//		printArr(test);
 		///////////////////////
 	}
 
@@ -66,16 +92,17 @@ int main(int, char**)
 	}
 
 	///////////////////////
-	printArr(numbers);
-	std::cout << "Printing mirrors\n";
-	for (int i = 0; i < MAX_VAL; ++i)
-		std::cout << mirror[i] << '\n';
+//	printArr(numbers);
+//	std::cout << "Printing mirrors\n";
+//	for (int i = 0; i < MAX_VAL; ++i)
+//		std::cout << mirror[i] << '\n';
 	///////////////////////
 
 	for (int i = 0; i < MAX_VAL; i++)
 	{
 		numbers[i] = rand();
 	}
+	std::cout << "Test ends\n";
 	delete [] mirror;//
 	return 0;
 }
