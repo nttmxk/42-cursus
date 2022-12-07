@@ -2,6 +2,7 @@
 # define SPAN_HPP
 
 # include <iostream>
+# include <exception>
 # include <algorithm>
 # include <vector>
 
@@ -31,12 +32,12 @@ public:
 
 	class NoSpaceException: public std::exception {
 	public:
-		const char *what() throw();
+		const char *what() const throw();
 	};
 
 	class NoSpanException: public std::exception {
 	public:
-		const char *what() throw();
+		const char *what() const throw();
 	};
 };
 

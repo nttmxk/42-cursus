@@ -5,7 +5,7 @@ Span::Span() {
 }
 
 Span::Span(unsigned int N) {
-	N = N;
+	this->N = N;
 }
 
 Span::Span(const Span &orig) {
@@ -35,8 +35,8 @@ unsigned int 	Span::shortestSpan() {
 	std::vector<int> tmp = v;
 	std::sort(tmp.begin(), tmp.end());
 	unsigned int shortest = *(tmp.begin() + 1) - *tmp.begin();
-	for (std::vector<int>iterator i = tmp.begin() + 1; i < tmp.end() - 1; i++) {
-		if (*(i + 1) - *i < shortest)
+	for (std::vector<int>::iterator i = tmp.begin() + 1; i < tmp.end() - 1; i++) {
+		if ((unsigned int)(*(i + 1) - *i) < shortest)
 			shortest = *(i + 1) - *i;
 	}
 	return (shortest);
@@ -45,19 +45,14 @@ unsigned int 	Span::shortestSpan() {
 unsigned int 	Span::longestSpan() {
 	if (v.size() < 2)
 		throw NoSpanException();
-	return (*std::max_element(v.begin(), v.end()) - *std::min_element(v.begin(), v.end()))
+	return (*std::max_element(v.begin(), v.end()) - *std::min_element(v.begin(), v.end()));
 }
 
-class NoSpaceException: public std::exception {
-public:
-	const char *what() const throw() {
-		return "No Space Exception\n";
-	}
-};
+const char *Span::NoSpaceException::what() const throw() {
+	return "No Space Exception\n";
+}
 
-class NoSpanException: public std::exception {
-public:
-	const char *what() throw() {
-		return "No Span Exception\n";
-	}
-};
+
+const char *Span::NoSpanException::what() const throw() {
+	return "No Span Exception\n";
+}
