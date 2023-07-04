@@ -2,16 +2,18 @@
 # define BITCOINEXCHANGE_HPP
 
 # include <iostream>
+# include <fstream>
 # include <exception>
 # include <cstring>
+# include <sstream>
 # include <map>
 
-class BitcoinExchange{
+class BitcoinExchange {
 private:
 	std::map<std::string, float> data;
-	bool checkDate(std::string &date);
-	bool checkValue(std::string &str);
-	std::string findDate(std::string &date);
+	bool		checkDate(const std::string &date);
+	bool		checkValue(const std::string &str);
+	std::string	findDate(const std::string &date);
 
 public:
 	BitcoinExchange();
@@ -19,8 +21,9 @@ public:
 	BitcoinExchange(const BitcoinExchange &src);
 	BitcoinExchange& operator=(const BitcoinExchange &src);
 
-	run(char *filename);
-	float findValue(std::string &date);
+	void	run(char *filename);
+	float	findValue(std::string &date);
+	void	print_map(void);
 
 	class ErrorException: public std::exception {
 	public:

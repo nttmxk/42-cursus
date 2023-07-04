@@ -8,13 +8,17 @@ void check_leaks()
 
 int main(int argc, char **argv)
 {
-	check_leaks();
+//	check_leaks();
 
-	if (argc != 2)
-	{
-		std::cout << "Input error\n";
-		return (1);
-	}
+//	if (argc != 2)
+//	{
+//		std::cout << "Input error\n";
+//		return (1);
+//	}
+
+	BitcoinExchange btc;
+	btc.run(argv[1]);
+//	btc.print_map();
 
 	return (0);
 }

@@ -1,12 +1,11 @@
 #include "BitcoinExchange.hpp"
 
-
 BitcoinExchange::BitcoinExchange(){}
 BitcoinExchange::~BitcoinExchange(){}
-BitcoinExchange::BitcoinExchange(const BitcoinExchange &src){ *this = orig; }
-BitcoinExchange::BitcoinExchange& operator=(const BitcoinExchange &src) {
-	if (this != src)
-		this->data = orig.data;
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &src){ *this = src; }
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &src) {
+	if (this != &src)
+		data = src.data;
 	return (*this);
 }
 
@@ -20,7 +19,7 @@ BitcoinExchange::BitcoinExchange& operator=(const BitcoinExchange &src) {
  *  2.2. 달마다 31일
  *  2.3. 2월 특수케이스
  */
-bool BitcoinExchange::checkDate(std::string &date)
+bool BitcoinExchange::checkDate(const std::string &date)
 {
 	if (date.length() != 10)
 		return false;
@@ -65,7 +64,7 @@ bool BitcoinExchange::checkDate(std::string &date)
  * 	1.2. 마지막자리 오류
  * 2. 범위초과
  */
-bool BitcoinExchange::checkValue(std::string &str)
+bool BitcoinExchange::checkValue(const std::string &str)
 {
 	char *ptr = NULL;
 	double val;
@@ -76,16 +75,16 @@ bool BitcoinExchange::checkValue(std::string &str)
 		return false;
 	if (*ptr && std::strcmp(ptr, "f"))
 		return false;
-	if (val < 0 || val > 1000)
+	if (val < 0)
 		return false;
 	return true;
 }
 
-BitcoinExchange::run(char *filename)
+void BitcoinExchange::run(char *filename)
 {
 	std::ifstream	csv("./data.csv");
 
-	if (file.fail())
+	if (csv.fail())
 		throw ErrorException();
 
 	std::string	line;
@@ -94,18 +93,17 @@ BitcoinExchange::run(char *filename)
 
 	if (!std::getline(csv, line))
 		throw ErrorException();
-	if (std::strcmp(line, "date,exchange_rate"))
+	if (std::strcmp(line.c_str(), "date,exchange_rate"))
 		throw ErrorException();
 
 	while (std::getline(csv, line))
 	{
 		deli = line.find(',');
-		if (checkDate(line.substr(0, deli)) == false)
+		if (!checkDate(line.substr(0, deli)))
 			throw ErrorException();
-		if (checkValue(line.substr(deli)) == false)
+		if (!checkValue(line.substr(deli + 1)))
 			throw ErrorException();
-
-		std::stringstream(line.substr(deli)) >> val;
+		std::stringstream(line.substr(deli + 1)) >> val;
 		data[line.substr(0, deli)] = val;
 	}
 	csv.close();
@@ -113,18 +111,25 @@ BitcoinExchange::run(char *filename)
 		throw ErrorException();
 }
 
-std::string BitcoinExchange::findDate(std::string &date)
+std::string BitcoinExchange::findDate(const std::string &date)
 {
-
+	return "1";
 }
 
 float BitcoinExchange::findValue(std::string &date)
 {
-
+	return 1;
 }
 
 
 const char* BitcoinExchange::ErrorException::what(void) const throw()
 {
 	return "Error\n";
+}
+
+void BitcoinExchange::print_map(void)
+{
+	for (std::map<std::string, float>::iterator it = data.begin(); it != data.end() ; ++it) {
+		std::cout << it->first << " " << it->second << '\n';
+	}
 }
