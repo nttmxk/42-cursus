@@ -11,6 +11,7 @@ private:
 	std::stack<float>	stack;
 	void	popOP(char c);
 	void	pushOP(const std::string &str);
+	void	checkInput(const char *s);
 
 public:
 	RPN();

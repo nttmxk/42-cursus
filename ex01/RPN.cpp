@@ -38,6 +38,8 @@ void	RPN::calculate(const char *s)
 		prev = next + 1;
 	}
 
+	if (prev + 1 != str.length())
+		throw std::runtime_error("Error: wrong input: end");
 	if (stack.size() != 1)
 		throw std::runtime_error("Error: wrong input: size");
 	std::cout << stack.top() << '\n';
