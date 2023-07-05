@@ -64,7 +64,7 @@ bool BitcoinExchange::checkDate(const std::string &date)
  * 	1.2. 마지막자리 오류
  * 2. 범위초과
  */
-bool BitcoinExchange::checkValue(const std::string &str)
+bool BitcoinExchange::checkValue(const std::string &str, bool Input)
 {
 	char *ptr = NULL;
 	double val;
@@ -77,13 +77,15 @@ bool BitcoinExchange::checkValue(const std::string &str)
 		return false;
 	if (val < 0)
 		return false;
+	if (Input && val > 1000)
+		return false;
 	return true;
 }
 
 void BitcoinExchange::run(char *filename)
 {
 	getRate();
-	getInput(filename);
+	handleInput(filename);
 }
 
 void BitcoinExchange::getRate(void)
@@ -94,7 +96,6 @@ void BitcoinExchange::getRate(void)
 		throw ErrorException();
 
 	std::string	line;
-	size_t		deli;
 	float 		val;
 
 	if (!std::getline(csv, line))
@@ -104,28 +105,59 @@ void BitcoinExchange::getRate(void)
 
 	while (std::getline(csv, line))
 	{
-		deli = line.find(',');
-		if (!checkDate(line.substr(0, deli)))
+		if (line.length() < 12 || line[10] != ',')
 			throw ErrorException();
-		if (!checkValue(line.substr(deli + 1)))
+		if (!checkDate(line.substr(0, 10)))
 			throw ErrorException();
-		std::stringstream(line.substr(deli + 1)) >> val;
-		data[line.substr(0, deli)] = val;
+		if (!checkValue(line.substr(11), false))
+			throw ErrorException();
+		std::stringstream(line.substr(11)) >> val;
+		data[line.substr(0, 10)] = val;
 	}
 	csv.close();
 	if (data.empty())
 		throw ErrorException();
 }
 
-//void BitcoinExchange::getInput(char *filename)
-//{
-//	std::ifstream	input(filename);
-//
-//	if (input.fail())
-//		throw ErrorException();
-//
-//
-//}
+void BitcoinExchange::handleInput(char *filename)
+{
+	std::ifstream	input(filename);
+
+	if (input.fail())
+		throw ErrorException();
+
+	std::string line;
+
+	if (!std::getline(input, line))
+		throw ErrorException();
+	if (std::strcmp(line.c_str(), "date | value"))
+		throw ErrorException();
+
+	while (std::getline(input, line))
+	{
+		if (line.length() < 14 || line[11] != '|' || line[10] != ' ' || line[12] != ' ')
+			throw ErrorException();
+		if (!checkDate(line.substr(0, 10)))
+			throw ErrorException();
+		if (!checkValue(line.substr(13), true))
+			throw ErrorException();
+		printResult(line);
+	}
+	input.close();
+}
+
+void BitcoinExchange::printResult(std::string &line)
+{
+	std::string date;
+	float val;
+	float result;
+
+	date = line.substr(0, 10);
+	std::stringstream(line.substr(13)) >> val;
+	result = val * findValue(findDate(date)); // what if result has invalid value
+
+	std::cout << date << " => " << val << " = " << result;
+}
 
 std::string BitcoinExchange::findDate(const std::string &date)
 {
@@ -136,7 +168,6 @@ float BitcoinExchange::findValue(std::string &date)
 {
 	return 1;
 }
-
 
 const char* BitcoinExchange::ErrorException::what(void) const throw()
 {

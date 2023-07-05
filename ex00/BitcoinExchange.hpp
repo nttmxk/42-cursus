@@ -12,8 +12,9 @@ class BitcoinExchange {
 private:
 	std::map<std::string, float> data;
 	bool		checkDate(const std::string &date);
-	bool		checkValue(const std::string &str);
+	bool		checkValue(const std::string &str, bool Input);
 	std::string	findDate(const std::string &date);
+	float		findValue(std::string &date);
 
 public:
 	BitcoinExchange();
@@ -23,8 +24,7 @@ public:
 
 	void	run(char *filename);
 	void	getRate(void);
-	void 	getInput(char *filename);
-	float	findValue(std::string &date);
+	void 	handleInput(char *filename);
 	void	print_map(void);
 
 	class ErrorException: public std::exception {
