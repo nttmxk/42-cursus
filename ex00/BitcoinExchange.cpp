@@ -156,7 +156,7 @@ void BitcoinExchange::printResult(std::string &line)
 	std::stringstream(line.substr(13)) >> val;
 	result = val * findValue(findDate(date)); // what if result has invalid value
 
-	std::cout << date << " => " << val << " = " << result;
+	std::cout << date << " => " << val << " = " << result << '\n';
 }
 
 std::string BitcoinExchange::findDate(const std::string &date)
