@@ -4,6 +4,7 @@ RPN::RPN(){}
 RPN::~RPN(){}
 RPN::RPN(const RPN &src){ *this = src; }
 RPN& RPN::operator=(const RPN &src) {
+	static_cast<void>(src);
 	return (*this);
 }
 
@@ -11,7 +12,6 @@ void	RPN::calculate(const char *str)
 {
 	size_t	cnt;
 	size_t	len;
-	int 	val;
 
 	len = strlen(str);
 	cnt = 0;
@@ -20,14 +20,11 @@ void	RPN::calculate(const char *str)
 			cnt++;
 	}
 
-	for (int i = 0; i < cnt && 2 * i <= len; ++i) {
-		if (str[2 * i] > '0' && str[2 * i] < '9')
-		{
-			std::stringstream(str[i]) >> val;
-			stack.push(val);
-		}
+	for (size_t i = 0; i < cnt + 1 && 2 * i <= len; ++i) {
+		if (str[2 * i] >= '0' && str[2 * i] <= '9')
+			stack.push(str[2 * i] - '0');
 		else
-			popOP(c);
+			popOP(str[2 * i]);
 	}
 	if (stack.size() != 1)
 		throw std::runtime_error("Error");
@@ -43,30 +40,18 @@ void	RPN::popOP(char c)
 
 	val = stack.top();
 	stack.pop();
+
 	if (c == '+')
-	{
 		val += stack.top();
-		stack.pop();
-		stack.push(val);
-	}
 	else if (c == '-')
-	{
-		val -= stack.top();
-		stack.pop();
-		stack.push(val);
-	}
+		val = stack.top() - val;
 	else if (c == '/')
-	{
-		val /= stack.top();
-		stack.pop();
-		stack.push(val);
-	}
+		val = stack.top() / val;
 	else if (c == '*')
-	{
 		val *= stack.top();
-		stack.pop();
-		stack.push(val);
-	}
 	else
 		throw std::runtime_error("Error: unknown op");
+
+	stack.pop();
+	stack.push(val);
 }

@@ -4,7 +4,6 @@
 # include <iostream>
 # include <stack>
 # include <cstring>
-# include <sstream>
 
 class RPN {
 private:
