@@ -174,7 +174,7 @@ std::string BitcoinExchange::findDate(const std::string &date)
 		return it->first;
 	it = data.lower_bound(date);
 	if (it == data.begin())
-		throw ErrorException();
+		throw std::runtime_error("Error: no match date exists");
 	return (--it)->first;
 }
 
