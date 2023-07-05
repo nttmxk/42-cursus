@@ -22,6 +22,8 @@ public:
 	BitcoinExchange& operator=(const BitcoinExchange &src);
 
 	void	run(char *filename);
+	void	getRate(void);
+	void 	getInput(char *filename);
 	float	findValue(std::string &date);
 	void	print_map(void);
 

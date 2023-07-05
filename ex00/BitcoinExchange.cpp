@@ -82,6 +82,12 @@ bool BitcoinExchange::checkValue(const std::string &str)
 
 void BitcoinExchange::run(char *filename)
 {
+	getRate();
+	getInput(filename);
+}
+
+void BitcoinExchange::getRate(void)
+{
 	std::ifstream	csv("./data.csv");
 
 	if (csv.fail())
@@ -110,6 +116,16 @@ void BitcoinExchange::run(char *filename)
 	if (data.empty())
 		throw ErrorException();
 }
+
+//void BitcoinExchange::getInput(char *filename)
+//{
+//	std::ifstream	input(filename);
+//
+//	if (input.fail())
+//		throw ErrorException();
+//
+//
+//}
 
 std::string BitcoinExchange::findDate(const std::string &date)
 {
