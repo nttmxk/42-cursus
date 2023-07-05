@@ -164,9 +164,9 @@ std::string BitcoinExchange::findDate(const std::string &date)
 	return "1";
 }
 
-float BitcoinExchange::findValue(std::string &date)
+float BitcoinExchange::findValue(const std::string &date)
 {
-	return 1;
+	return data[date];
 }
 
 const char* BitcoinExchange::ErrorException::what(void) const throw()

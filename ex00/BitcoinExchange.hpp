@@ -14,7 +14,8 @@ private:
 	bool		checkDate(const std::string &date);
 	bool		checkValue(const std::string &str, bool Input);
 	std::string	findDate(const std::string &date);
-	float		findValue(std::string &date);
+	float		findValue(const std::string &date);
+	void		printResult(std::string &line);
 
 public:
 	BitcoinExchange();
