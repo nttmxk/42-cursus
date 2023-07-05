@@ -15,7 +15,9 @@ private:
 	bool		checkValue(const std::string &str, bool Input);
 	std::string	findDate(const std::string &date);
 	float		findValue(const std::string &date);
-	void		printResult(std::string &line);
+	void		printResult(const std::string &line);
+	void		getRate(void);
+	void		handleInput(const char *filename);
 
 public:
 	BitcoinExchange();
@@ -23,9 +25,7 @@ public:
 	BitcoinExchange(const BitcoinExchange &src);
 	BitcoinExchange& operator=(const BitcoinExchange &src);
 
-	void	run(char *filename);
-	void	getRate(void);
-	void	handleInput(char *filename);
+	void	run(const char *filename);
 	void	print_map(void);
 };
 

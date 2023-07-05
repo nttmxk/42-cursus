@@ -82,7 +82,7 @@ bool BitcoinExchange::checkValue(const std::string &str, bool Input)
 	return true;
 }
 
-void BitcoinExchange::run(char *filename)
+void BitcoinExchange::run(const char *filename)
 {
 	getRate();
 	handleInput(filename);
@@ -119,7 +119,7 @@ void BitcoinExchange::getRate(void)
 		throw std::runtime_error("Error: Failed to store map data from csv file");
 }
 
-void BitcoinExchange::handleInput(char *filename)
+void BitcoinExchange::handleInput(const char *filename)
 {
 	std::ifstream	input(filename);
 
@@ -152,7 +152,7 @@ void BitcoinExchange::handleInput(char *filename)
 	input.close();
 }
 
-void BitcoinExchange::printResult(std::string &line)
+void BitcoinExchange::printResult(const std::string &line)
 {
 	std::string date;
 	float val;
