@@ -165,11 +165,11 @@ std::string BitcoinExchange::findDate(const std::string &date)
 
 	it = data.find(date);
 	if (it != data.end())
-		return it;
+		return it->first;
 	it = data.lower_bound(date);
 	if (it == data.begin())
 		throw ErrorException();
-	return --it;
+	return (--it)->first;
 }
 
 float BitcoinExchange::findValue(const std::string &date)
