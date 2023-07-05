@@ -4,11 +4,13 @@
 # include <iostream>
 # include <stack>
 # include <cstring>
+# include <sstream>
 
 class RPN {
 private:
-	std::stack<int> stack;
+	std::stack<float>	stack;
 	void	popOP(char c);
+	void	pushOP(const std::string &str);
 
 public:
 	RPN();

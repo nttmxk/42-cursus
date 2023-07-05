@@ -8,32 +8,68 @@ RPN& RPN::operator=(const RPN &src) {
 	return (*this);
 }
 
-void	RPN::calculate(const char *str)
+void	RPN::checkInput(const char *s)
 {
-	size_t	cnt;
-	size_t	len;
+	std::string str = s;
+	std::string	valid = "0123456789+-/* ";
+	size_t pos = str.find_first_not_of(valid);
 
-	len = strlen(str);
-	cnt = 0;
+	if (pos != std::string::npos)
+		throw std::runtime_error("Error: unknown character");
+}
+
+void	RPN::calculate(const char *s)
+{
+	std::string str = s;
+	size_t	prev = 0;
+	size_t	next;
+
+	while (str[prev])
+	{
+		next = str.find(' ', prev);
+		if (next == std::string::npos) {
+			popOP(str[prev]);
+			break;
+		}
+		if (next - prev == 1 && !std::isdigit(str[prev]))
+			popOP(str[prev]);
+		else
+			pushOP(str.substr(prev, next - prev));
+		prev = next + 1;
+	}
+
+	if (stack.size() != 1)
+		throw std::runtime_error("Error: wrong input: size");
+	std::cout << stack.top() << '\n';
+}
+
+void	RPN::pushOP(const std::string &str)
+{
+	std::string valid = "0123456789.";
+	size_t pos = str.find_first_not_of(valid);
+
+	if (pos != std::string::npos)
+		throw std::runtime_error("Error: wrong input: number [npos]");
+
+	size_t	cnt = 0;
 	for (int i = 0; str[i]; ++i) {
-		if (str[i] == ' ')
+		if (str[i] == '.')
 			cnt++;
 	}
+	if (cnt > 1)
+		throw std::runtime_error("Error: wrong input: number [.]");
 
-	for (size_t i = 0; i < cnt + 1 && 2 * i <= len; ++i) {
-		if (str[2 * i] >= '0' && str[2 * i] <= '9')
-			stack.push(str[2 * i] - '0');
-		else
-			popOP(str[2 * i]);
-	}
-	if (stack.size() != 1)
-		throw std::runtime_error("Error");
-	std::cout << stack.top() << '\n';
+	float	val;
+
+	std::stringstream(str) >> val;
+	if (val >= 10.0)
+		throw std::runtime_error("Error: wrong input: number [10.0]");
+	stack.push(val);
 }
 
 void	RPN::popOP(char c)
 {
-	int val;
+	float	val;
 
 	if (stack.size() < 2)
 		throw std::runtime_error("Error: pop");
