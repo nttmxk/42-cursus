@@ -93,30 +93,30 @@ void BitcoinExchange::getRate(void)
 	std::ifstream	csv("./data.csv");
 
 	if (csv.fail())
-		throw ErrorException();
+		throw std::runtime_error("Error: Failed to open csv file");
 
 	std::string	line;
 	float 		val;
 
 	if (!std::getline(csv, line))
-		throw ErrorException();
+		throw std::runtime_error("Error: Failed to read csv line");
 	if (std::strcmp(line.c_str(), "date,exchange_rate"))
-		throw ErrorException();
+		throw std::runtime_error("Error: csv file has invalid header");
 
 	while (std::getline(csv, line))
 	{
 		if (line.length() < 12 || line[10] != ',')
-			throw ErrorException();
+			throw std::runtime_error("Error: csv line has wrong format");
 		if (!checkDate(line.substr(0, 10)))
-			throw ErrorException();
+			throw std::runtime_error("Error: csv line has wrong date format");
 		if (!checkValue(line.substr(11), false))
-			throw ErrorException();
+			throw std::runtime_error("Error: csv line has wrong value format");
 		std::stringstream(line.substr(11)) >> val;
 		data[line.substr(0, 10)] = val;
 	}
 	csv.close();
 	if (data.empty())
-		throw ErrorException();
+		throw std::runtime_error("Error: Failed to store map data from csv file");
 }
 
 void BitcoinExchange::handleInput(char *filename)
@@ -124,23 +124,29 @@ void BitcoinExchange::handleInput(char *filename)
 	std::ifstream	input(filename);
 
 	if (input.fail())
-		throw ErrorException();
+		throw std::runtime_error("Error: Failed to open input file");
 
 	std::string line;
 
 	if (!std::getline(input, line))
-		throw ErrorException();
+		throw std::runtime_error("Error: Failed to read input line");
 	if (std::strcmp(line.c_str(), "date | value"))
-		throw ErrorException();
+		throw std::runtime_error("Error: input file has invalid header");
 
 	while (std::getline(input, line))
 	{
 		if (line.length() < 14 || line[11] != '|' || line[10] != ' ' || line[12] != ' ')
-			throw ErrorException();
+			throw std::runtime_error("Error: input line has wrong format");
 		if (!checkDate(line.substr(0, 10)))
-			throw ErrorException();
+		{
+			std::cerr << "Error: bad input => " << line.substr(0, 10) << '\n';
+			continue;
+		}
 		if (!checkValue(line.substr(13), true))
-			throw ErrorException();
+		{
+			std::cerr << "Error: not a valid value\n";
+			continue;
+		}
 		printResult(line);
 	}
 	input.close();
@@ -175,11 +181,6 @@ std::string BitcoinExchange::findDate(const std::string &date)
 float BitcoinExchange::findValue(const std::string &date)
 {
 	return data[date];
-}
-
-const char* BitcoinExchange::ErrorException::what(void) const throw()
-{
-	return "Error\n";
 }
 
 void BitcoinExchange::print_map(void)

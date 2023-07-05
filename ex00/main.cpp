@@ -17,7 +17,11 @@ int main(int argc, char **argv)
 //	}
 
 	BitcoinExchange btc;
-	btc.run(argv[1]);
+	try {
+		btc.run(argv[1]);
+	} catch (const std::exception &e) {
+		std::cerr << e.what() << '\n';
+	}
 //	btc.print_map();
 
 	return (0);
