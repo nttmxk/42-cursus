@@ -11,7 +11,6 @@ private:
 	std::stack<float>	stack;
 	void	popOP(char c);
 	void	pushOP(const std::string &str);
-	void	checkInput(const char *s);
 
 public:
 	RPN();
@@ -19,7 +18,8 @@ public:
 	RPN(const RPN &src);
 	RPN& operator=(const RPN &src);
 
-	void	calculate(const char *str);
+	void	checkInput(const char *s);
+	void	calculate(const char *s);
 };
 
 #endif
