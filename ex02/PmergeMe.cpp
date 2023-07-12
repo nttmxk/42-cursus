@@ -24,7 +24,7 @@ void	PmergeMe::checkInput(const char *s)
 		throw std::runtime_error("Error: wrong input: number");
 
 	std::stringstream(str) >> val;
-	input.insert(val);
+	input.push_back(val);
 }
 
 void	PmergeMe::sort(int n, const char **argv)
