@@ -11,7 +11,7 @@ RPN& RPN::operator=(const RPN &src) {
 void	RPN::checkInput(const char *s)
 {
 	std::string str = s;
-	std::string	valid = "0123456789+-/* ";
+	std::string	valid = "0123456789+-/*. ";
 	size_t pos = str.find_first_not_of(valid);
 
 	if (pos != std::string::npos)
@@ -28,6 +28,12 @@ void	RPN::calculate(const char *s)
 	{
 		next = str.find(' ', prev);
 		if (next == std::string::npos) {
+			if (prev == 0)
+			{
+				pushOP(str.substr(prev));
+				std::cout << stack.top() << '\n';
+				return;
+			}
 			popOP(str[prev]);
 			break;
 		}
