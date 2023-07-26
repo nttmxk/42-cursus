@@ -56,6 +56,8 @@ void	RPN::pushOP(const std::string &str)
 	std::string valid = "0123456789.";
 	size_t pos = str.find_first_not_of(valid);
 
+	if (str.empty())
+		throw std::runtime_error("Error: wrong input: str_size");
 	if (pos != std::string::npos)
 		throw std::runtime_error("Error: wrong input: number [npos]");
 

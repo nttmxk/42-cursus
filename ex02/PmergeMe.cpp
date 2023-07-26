@@ -100,14 +100,14 @@ void	PmergeMe::sort(int n, char **argv)
 	end = clock();
 	std::cout << "After:	";
 	printC(v);
-	std::cout << "Time to process a range of " << n << " elements with std::vector	: " << (double)(end - start) << " ms\n";
+	std::cout << "Time to process a range of " << n << " elements with std::vector : " << (double)(end - start) << " ms\n";
 
 	start = clock();
 	d = sortDeque(d.begin(), d.end(), 1);
 	if (!std::is_sorted(d.begin(), d.end()))
 		throw std::runtime_error("Error: deque_is_not_sorted");
 	end = clock();
-	std::cout << "Time to process a range of " << n << " elements with std::deque	: " << (double)(end - start) << " ms\n";
+	std::cout << "Time to process a range of " << n << " elements with std::deque  : " << (double)(end - start) << " ms\n";
 }
 
 std::vector<int> PmergeMe::sortVector(std::vector<int>::iterator first, std::vector<int>::iterator last, int depth)
