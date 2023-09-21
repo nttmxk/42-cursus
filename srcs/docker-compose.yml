@@ -47,17 +47,15 @@ services:
 
 volumes:
   mariadb:
-    name: mariadb_volume
     driver: local
     driver_opts:
-      device: ${HOME}/jinoh/data/DB
+      device: ${HOME}/data/DB
       type: none
       o: bind
   wordpress:
-    name: wordpress_volume
     driver: local
     driver_opts:
-      device: ${HOME}/jinoh/data/WP
+      device: ${HOME}/data/WP
       type: none
       o: bind
 

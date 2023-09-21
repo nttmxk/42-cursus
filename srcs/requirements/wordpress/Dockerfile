@@ -5,6 +5,7 @@ RUN apk update && apk add --no-cache \
 		php82-fpm \
 		php82-mysqli \
 		php82-phar \
+		php82-iconv \
 		curl \
 		mysql-client
 
@@ -17,6 +18,7 @@ RUN ln -s /usr/local/bin/wp-cli.phar /usr/local/bin/wp
 RUN ln -sf /usr/sbin/php-fpm82 /usr/sbin/php-fpm
 RUN ln -s /usr/bin/php82 /usr/bin/php
 
+#RUN sed -i 's/;chdir = \/var\/www/chdir = \/var\/www\/html/g' /etc/php82/php-fpm.d/www.conf
 RUN sed -i 's|listen = 127.0.0.1:9000|listen = 9000|g' /etc/php82/php-fpm.d/www.conf
 
 WORKDIR /var/www/html

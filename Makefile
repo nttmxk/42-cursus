@@ -1,29 +1,32 @@
-name = simple_nginx_html
-all:
-	@printf "Launch configuration ${name}...\n"
-	@docker-compose -f ./docker-compose.yml up -d
+DOCKER_COMPOSE_YML		= srcs/docker-compose.yml
+DOCKER_DATA_DIR			= $(HOME)/data
 
-build:
-	@printf "Building configuration ${name}...\n"
-	@docker-compose -f ./docker-compose.yml up -d --build
+DOMAIN				= "127.0.0.1 jinoh.42.fr"
+
+all : run
+
+run : $(DOCKER_DATA_DIR) $(DOMAIN)
+	docker-compose -f $(DOCKER_COMPOSE_YML) build --no-cache
+	docker-compose -f $(DOCKER_COMPOSE_YML) up -d
+up :
+	docker-compose -f $(DOCKER_COMPOSE_YML) up -d
 
 down:
-	@printf "Stopping configuration ${name}...\n"
-	@docker-compose -f ./docker-compose.yml down
+	docker-compose -f $(DOCKER_COMPOSE_YML) down
 
-re:	down
-	@printf "Rebuild configuration ${name}...\n"
-	@docker-compose -f ./docker-compose.yml up -d --build
+$(DOCKER_DATA_DIR) :
+	mkdir -p $(DOCKER_DATA_DIR)/DB
+	mkdir -p $(DOCKER_DATA_DIR)/WP
 
-clean: down
-	@printf "Cleaning configuration ${name}...\n"
-	@docker system prune -a
+$(DOMAIN) :
+	@if [ ! "$$(sudo grep $(DOMAIN) /etc/hosts)" ]; then sudo sh -c 'echo $(DOMAIN) >> /etc/hosts'; fi
 
-fclean:
-	@printf "Total clean of all configurations docker\n"
-	@docker stop $$(docker ps -qa)
-	@docker system prune --all --force --volumes
-	@docker network prune --force
-	@docker volume prune --force
+clean :
+	docker-compose -f $(DOCKER_COMPOSE_YML) down --volumes
+	docker system prune -a
+	sudo rm -rf $(DOCKER_DATA_DIR)
+
+fclean : clean
+	sudo sed -i s/$(DOMAIN)//g /etc/hosts
 
 .PHONY	: all build down re clean fclean
