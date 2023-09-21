@@ -29,4 +29,4 @@ clean :
 fclean : clean
 	sudo sed -i s/$(DOMAIN)//g /etc/hosts
 
-.PHONY	: all build down re clean fclean
+.PHONY	: all build up down clean fclean
