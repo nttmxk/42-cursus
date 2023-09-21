@@ -6,8 +6,7 @@ DOMAIN				= "127.0.0.1 jinoh.42.fr"
 all : run
 
 run : $(DOCKER_DATA_DIR) $(DOMAIN)
-	docker-compose -f $(DOCKER_COMPOSE_YML) build --no-cache
-	docker-compose -f $(DOCKER_COMPOSE_YML) up -d
+	docker-compose -f $(DOCKER_COMPOSE_YML) up -d --build
 up :
 	docker-compose -f $(DOCKER_COMPOSE_YML) up -d
 
@@ -15,18 +14,17 @@ down:
 	docker-compose -f $(DOCKER_COMPOSE_YML) down
 
 $(DOCKER_DATA_DIR) :
-	mkdir -p $(DOCKER_DATA_DIR)/DB
-	mkdir -p $(DOCKER_DATA_DIR)/WP
+	@mkdir -p $(DOCKER_DATA_DIR)/DB
+	@mkdir -p $(DOCKER_DATA_DIR)/WP
 
 $(DOMAIN) :
 	@if [ ! "$$(sudo grep $(DOMAIN) /etc/hosts)" ]; then sudo sh -c 'echo $(DOMAIN) >> /etc/hosts'; fi
 
-clean :
+fclean :
 	docker-compose -f $(DOCKER_COMPOSE_YML) down --volumes
 	docker system prune -a
 	sudo rm -rf $(DOCKER_DATA_DIR)
 
-fclean : clean
-	sudo sed -i s/$(DOMAIN)//g /etc/hosts
+clean : down
 
 .PHONY	: all build up down clean fclean
