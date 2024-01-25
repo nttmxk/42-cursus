@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:1.25.2
+    container_name: nginx
+    build: ./requirements/nginx
+    ports:
+      - 443:443
+    networks:
+      - jinoh
+    volumes:
+      - wordpress:/var/www/html
+    depends_on:
+      - wordpress
+    restart: always
+
+  mariadb:
+    image: mariadb:11.0.3
+    container_name: mariadb
+    build: ./requirements/mariadb
+    env_file:
+      - .env
+    ports:
+      - 3306:3306
+    networks:
+      - jinoh
+    volumes:
+      - mariadb:/var/lib/mysql
+    restart: always
+
+  wordpress:
+    image: wordpress:6.3
+    container_name: wordpress
+    build: ./requirements/wordpress
+    env_file:
+      - .env
+    ports:
+      - 9000:9000
+    networks:
+      - jinoh
+    volumes:
+      - wordpress:/var/www/html
+    depends_on:
+      - mariadb
+    restart: always
+
+volumes:
+  mariadb:
+    driver: local
+    driver_opts:
+      device: ${HOME}/data/DB
+      type: none
+      o: bind
+  wordpress:
+    driver: local
+    driver_opts:
+      device: ${HOME}/data/WP
+      type: none
+      o: bind
+
+networks:
+  jinoh:
+    driver: bridge
+
+# volumes
+## driver:local 도커가 호스트 파일 시스템에 볼륨을 생성하고 관리하는 기본 드라이버
+## type: 마운트할 볼륨의 파일 시스템 유형을 지정
+## o: 추가적인 마운트 옵션 지정.
+
+# networks
+## bridge는 도커의 기본 네트워크 드라이버. 내부적으로 IP주소를 할당받으며 컨테이너간 통신 가능.
