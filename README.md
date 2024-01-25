@@ -1,7 +1,7 @@
 # 42-cursus
 42 Seoul Projects
 | Circle | Subject          | Mission | ETC* | Score | Status |
-|--------|------------------|---------|-------|-------|--------|
+|:------:|:----------------:|:-------:|:-----:|:-----:|:------:|
 | 0      | Libft            |         | 70h   | 125   | pass   |
 | 1      | get_next_line    |         | 70h   | 125   | pass   |
 |        | ft_printf        |         | 70h   | 117   | pass   |
