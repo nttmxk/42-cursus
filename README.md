@@ -17,6 +17,5 @@
 | 5      | [ft_containers](https://github.com/nttmxk/42-cursus/tree/main/circle_5/CPP-Module-09)    | Using and learning C++ containers | 40h | 100 |
 |        | [ft_irc](https://github.com/nttmxk/42-cursus/tree/main/circle_5/ft_irc)                  | Creating your own IRC server | 175h | 100 |
 |        | [Inception](https://github.com/nttmxk/42-cursus/tree/main/circle_5/Inception)            | Virtualize serveral Docker images in personal virtual machine | 210h | 100 |
-| 6      | ft_transcendence                                                                         | Develop a website for live chat & pong game with several modules | 245h | in progress |
 
 \*Estimated Time to Complete
